@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="49" id="KGk-i7-Jjw" customClass="FFDropDownMenuCell">
+            <rect key="frame" x="0.0" y="0.0" width="308" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="308" height="48"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gW9-U1-aR2" userLabel="头像">
+                        <rect key="frame" x="10" y="5" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="gW9-U1-aR2" secondAttribute="height" id="HLL-vq-KuA"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="菜单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKi-fu-FMf" userLabel="菜单的标题">
+                        <rect key="frame" x="58" y="0.0" width="250" height="48"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPE-xT-jjz" userLabel="分割线">
+                        <rect key="frame" x="0.0" y="47" width="308" height="1"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Lit-cR-lce"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IKi-fu-FMf" firstAttribute="leading" secondItem="gW9-U1-aR2" secondAttribute="trailing" constant="10" id="17S-P1-ZnR"/>
+                    <constraint firstAttribute="trailing" secondItem="IKi-fu-FMf" secondAttribute="trailing" id="3Nm-g4-ujD"/>
+                    <constraint firstAttribute="bottom" secondItem="IKi-fu-FMf" secondAttribute="bottom" id="A0i-uv-3JE"/>
+                    <constraint firstItem="IKi-fu-FMf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ISp-3R-hUU"/>
+                    <constraint firstAttribute="bottom" secondItem="zPE-xT-jjz" secondAttribute="bottom" id="Mai-5x-fTB"/>
+                    <constraint firstItem="zPE-xT-jjz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Zow-Dd-NwK"/>
+                    <constraint firstItem="gW9-U1-aR2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="cE1-1g-ZVr"/>
+                    <constraint firstAttribute="bottom" secondItem="gW9-U1-aR2" secondAttribute="bottom" constant="5" id="fA2-gL-Od8"/>
+                    <constraint firstAttribute="trailing" secondItem="zPE-xT-jjz" secondAttribute="trailing" id="ft7-kk-u6A"/>
+                    <constraint firstItem="gW9-U1-aR2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ihx-ov-0KK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="customImageView" destination="gW9-U1-aR2" id="ydD-UR-Leu"/>
+                <outlet property="customTitleLabel" destination="IKi-fu-FMf" id="01a-rE-963"/>
+            </connections>
+            <point key="canvasLocation" x="212" y="446.5"/>
+        </tableViewCell>
+    </objects>
+</document>
