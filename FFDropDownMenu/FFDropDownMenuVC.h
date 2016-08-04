@@ -6,13 +6,13 @@
 //  Copyright © 2016年 chenfanfang. All rights reserved.
 //
 
-#import "FFViewController.h"
+#import <UIKit/UIKit.h>
 @class FFDropDownMenuModel;
 
 /**
  *  下拉菜单控制器
  */
-@interface FFDropDownMenuVC : FFViewController
+@interface FFDropDownMenuVC : UIViewController
 
 /**
  *  快速实例化一个下拉菜单
