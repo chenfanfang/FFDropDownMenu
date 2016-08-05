@@ -29,8 +29,6 @@
     
     /** 进行基本的设置、搭建出手机QQ首页效果、读者可忽略setupBasedView 中的代码 */
     [self setupBasedView];
-    
-    
 }
 
 
@@ -58,10 +56,11 @@
     UIBarButtonItem *headerIconItem = [[UIBarButtonItem alloc] initWithCustomView:headerImageView];
     self.navigationItem.leftBarButtonItem = headerIconItem;
     
-    
     //手机QQ首页的图片
     self.view.backgroundColor = [UIColor whiteColor];
-    UIImageView *homeImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    CGFloat marign = 5;
+    UIImageView *homeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(marign, 15, size.width - 2 * marign, size.height)];
     homeImageView.image = [UIImage imageNamed:@"QQHomeBg"];
     [self.view addSubview:homeImageView];
     
