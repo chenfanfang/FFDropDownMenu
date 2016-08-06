@@ -92,10 +92,10 @@
     FFDropDownMenuView *menuView = [FFDropDownMenuView new];
     
     menuView.menuModelsArray = menuModelsArray;
-    menuView.menuWidth = menuWidth == FFDefaultFloat ? menuView.menuWidth : menuWidth;
-    menuView.eachMenuItemHeight = eachItemHeight == FFDefaultFloat ? menuView.eachMenuItemHeight : eachItemHeight;
-    menuView.menuRightMargin = menuRightMargin == FFDefaultFloat ? menuView.menuRightMargin : menuRightMargin;
-    menuView.triangleRightMargin = triangleRightMargin == FFDefaultFloat ? menuView.triangleRightMargin : triangleRightMargin;
+    menuView.menuWidth = menuWidth;
+    menuView.eachMenuItemHeight = eachItemHeight;
+    menuView.menuRightMargin = menuRightMargin;
+    menuView.triangleRightMargin = triangleRightMargin;
     
     [menuView setup];
     return menuView;
@@ -108,18 +108,18 @@
     //属性的赋值
     menuView.menuModelsArray = menuModelsArray;
     menuView.cellClassName = cellClassName;
-    menuView.menuWidth = menuWidth == FFDefaultFloat ? menuView.menuWidth : menuWidth;
-    menuView.menuCornerRadius = menuCornerRadius == FFDefaultFloat ? menuView.menuCornerRadius : menuCornerRadius;
-    menuView.eachMenuItemHeight = eachItemHeight == FFDefaultFloat ? menuView.eachMenuItemHeight : eachItemHeight;
-    menuView.menuRightMargin = menuRightMargin == FFDefaultFloat ? menuView.menuRightMargin : menuRightMargin;
+    menuView.menuWidth = menuWidth;
+    menuView.menuCornerRadius = menuCornerRadius;
+    menuView.eachMenuItemHeight = eachItemHeight;
+    menuView.menuRightMargin = menuRightMargin;
     menuView.triangleColor = triangleColor;
-    menuView.triangleY = triangleY == FFDefaultFloat ? menuView.triangleY : triangleY;
+    menuView.triangleY = triangleY;
     menuView.realTriangleY = menuView.triangleY;
-    menuView.triangleRightMargin = triangleRightMargin == FFDefaultFloat ? menuView.triangleRightMargin : triangleRightMargin;
+    menuView.triangleRightMargin = triangleRightMargin;
     menuView.triangleSize = triangleSize;
-    menuView.bgColorbeginAlpha = bgColorBeginAlpha == FFDefaultFloat ? menuView.bgColorbeginAlpha : bgColorBeginAlpha;
-    menuView.bgColorEndAlpha = bgColorEndAlpha == FFDefaultFloat ? menuView.bgColorEndAlpha : bgColorEndAlpha;
-    menuView.animateDuration = animateDuration == FFDefaultFloat ? menuView.animateDuration : animateDuration;
+    menuView.bgColorbeginAlpha = bgColorBeginAlpha;
+    menuView.bgColorEndAlpha = bgColorEndAlpha;
+    menuView.animateDuration = animateDuration;
     menuView.menuScaleType = menuScaleType;
     
     //初始化
@@ -337,6 +337,83 @@ static NSString *const CellID = @"CellID";
     }];
 }
 
+
+/******************************所有属性的set方法***********************************/
+#pragma mark - set方法
+
+- (void)setMenuModelsArray:(NSArray *)menuModelsArray {//1
+    _menuModelsArray = menuModelsArray;
+}
+
+- (void)setCellClassName:(NSString *)cellClassName {//2
+    _cellClassName = cellClassName;
+}
+
+- (void)setMenuWidth:(CGFloat)menuWidth {//3
+    if (menuWidth != FFDefaultFloat) {
+        _menuWidth = menuWidth;
+    }
+}
+
+- (void)setMenuCornerRadius:(CGFloat)menuCornerRadius {//4
+    if (menuCornerRadius != FFDefaultFloat) {
+        _menuCornerRadius = menuCornerRadius;
+    }
+}
+
+- (void)setEachMenuItemHeight:(CGFloat)eachMenuItemHeight {//5
+    if (eachMenuItemHeight != FFDefaultFloat) {
+        _eachMenuItemHeight = eachMenuItemHeight;
+    }
+}
+
+- (void)setMenuRightMargin:(CGFloat)menuRightMargin {//6
+    if (menuRightMargin != FFDefaultFloat) {
+        _menuRightMargin = menuRightMargin;
+    }
+}
+
+- (void)setTriangleColor:(UIColor *)triangleColor {//7
+    _triangleColor = triangleColor;
+}
+
+- (void)setTriangleY:(CGFloat)triangleY {//8
+    if (triangleY != FFDefaultFloat) {
+        _triangleY = triangleY;
+    }
+}
+
+- (void)setTriangleRightMargin:(CGFloat)triangleRightMargin {//9
+    if (triangleRightMargin != FFDefaultFloat) {
+        _triangleRightMargin = triangleRightMargin;
+    }
+}
+
+- (void)setTriangleSize:(CGSize)triangleSize {//10
+    _triangleSize = triangleSize;
+}
+
+- (void)setBgColorbeginAlpha:(CGFloat)bgColorbeginAlpha {//11
+    if (bgColorbeginAlpha != FFDefaultFloat) {
+        _bgColorbeginAlpha = bgColorbeginAlpha;
+    }
+}
+
+- (void)setBgColorEndAlpha:(CGFloat)bgColorEndAlpha {//12
+    if (bgColorEndAlpha != FFDefaultFloat) {
+        _bgColorEndAlpha = bgColorEndAlpha;
+    }
+}
+
+- (void)setAnimateDuration:(CGFloat)animateDuration {//13
+    if (animateDuration != FFDefaultFloat) {
+        _animateDuration = animateDuration;
+    }
+}
+
+- (void)setMenuScaleType:(FFDropDownMenuViewScaleType)menuScaleType {//14
+    _menuScaleType = menuScaleType;
+}
 
 
 @end

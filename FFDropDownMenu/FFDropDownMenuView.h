@@ -109,50 +109,52 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
 + (instancetype)ff_DropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray cellClassName:(NSString *)cellClassName menuWidth:(CGFloat)menuWidth menuCornerRadius:(CGFloat)menuCornerRadius eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleColor:(UIColor *)triangleColor triangleY:(CGFloat)triangleY triangleRightMargin:(CGFloat)triangleRightMargin triangleSize:(CGSize)triangleSize bgColorBeginAlpha:(CGFloat)bgColorBeginAlpha bgColorEndAlpha:(CGFloat)bgColorEndAlpha animateDuration:(CGFloat)animateDuration menuScaleType:(FFDropDownMenuViewScaleType)menuScaleType;
 
 
-///--------------------------------------
+///-------------------------------------------------------------------
 ///          创建下拉菜单方式3
 ///   适用于自定义下拉菜单样式，单个属性进行赋值
 ///   >>步骤:
 ///   1、 [FFDropDownMenuView alloc] init]
 ///   2、 对需要赋值的属性进行赋值
+///       >>>>>>>>若要使用默认值，可以不对属性进行赋值，或者赋值 FFDefault....
+///
 ///   3、 调用 setup方法
-///--------------------------------------
+///-------------------------------------------------------------------
 
 
 
 
-/** 下拉菜单模型数组(数组里面存放 FFDropDownMenuBasedModel的子类的对象) */
+/** 1、下拉菜单模型数组(数组里面存放 FFDropDownMenuBasedModel的子类的对象) */
 @property (nonatomic, strong) NSArray *menuModelsArray;
-/** cell的类名，必须是FFDropDownMenuBasedCell 或者是FFDropDownMenuBasedCell的子类
+/** 2、cell的类名，必须是FFDropDownMenuBasedCell 或者是FFDropDownMenuBasedCell的子类
  *             若用框架自带的cell  直接传@"FFDropDownMenuCell"
  *             自定义的cell,就传自定义cell的类名,若cell是xib,则传@"类名.xib"
  *             如:@"FFDropDownMenuCell.xib"
  *             若不设置，默认为 @"FFDropDownMenuCell"
  */
 @property (nonatomic, copy) NSString *cellClassName;
-/** 菜单的宽度(若不设置，默认为 150) */
+/** 3、菜单的宽度(若不设置，默认为 150) */
 @property (nonatomic, assign) CGFloat menuWidth;
-/** 菜单的圆角半径(若不设置，默认为5) */
+/** 4、菜单的圆角半径(若不设置，默认为5) */
 @property (nonatomic, assign) CGFloat menuCornerRadius;
-/** 每一个选项的高度(若不设置，默认为40) */
+/** 5、每一个选项的高度(若不设置，默认为40) */
 @property (nonatomic, assign) CGFloat eachMenuItemHeight;
-/** 菜单条离屏幕右边的间距(若不设置，默认为10) */
+/** 6、菜单条离屏幕右边的间距(若不设置，默认为10) */
 @property (nonatomic, assign) CGFloat menuRightMargin;
-/** 三角形颜色(若不设置，默认为白色) */
+/** 7、三角形颜色(若不设置，默认为白色) */
 @property (nonatomic, strong) UIColor *triangleColor;
-/** 三角形相对于keyWindow的y值,也就是相对于屏幕顶部的y值(若不设置，默认为64) */
+/** 8、三角形相对于keyWindow的y值,也就是相对于屏幕顶部的y值(若不设置，默认为64) */
 @property (nonatomic, assign) CGFloat triangleY;
-/** 三角形距离屏幕右边的间距(若不设置，默认为20) */
+/** 9、三角形距离屏幕右边的间距(若不设置，默认为20) */
 @property (nonatomic, assign) CGFloat triangleRightMargin;
-/** 三角形的size  size.width:代表三角形底部边长，size.Height:代表三角形的高度(若不设置，默认为CGSizeMake(15, 10)) */
+/** 10、三角形的size  size.width:代表三角形底部边长，size.Height:代表三角形的高度(若不设置，默认为CGSizeMake(15, 10)) */
 @property (nonatomic, assign) CGSize triangleSize;
-/** 背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02) */
+/** 11、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02) */
 @property (nonatomic, assign) CGFloat bgColorbeginAlpha;
-/** 背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2) */
+/** 12、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2) */
 @property (nonatomic, assign) CGFloat bgColorEndAlpha;
-/** 动画效果时间(若不设置，默认为0.2) */
+/** 13、动画效果时间(若不设置，默认为0.2) */
 @property (nonatomic, assign) CGFloat animateDuration;
-/** 菜单的伸缩类型 */
+/** 14、菜单的伸缩类型 */
 @property (nonatomic, assign) FFDropDownMenuViewScaleType menuScaleType;
 
 
