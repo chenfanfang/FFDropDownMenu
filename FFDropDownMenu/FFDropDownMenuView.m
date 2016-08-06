@@ -174,6 +174,7 @@ static NSString *const CellID = @"CellID";
                 return _tableView;
             }
             
+            self.isCellCorrect = YES;
             UINib *cellNib = [UINib nibWithNibName:className bundle:nil];
             [tableView registerNib:cellNib forCellReuseIdentifier:CellID];
             
