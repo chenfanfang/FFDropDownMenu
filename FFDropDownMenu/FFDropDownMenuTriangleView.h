@@ -12,4 +12,7 @@
  */
 @interface FFDropDownMenuTriangleView : UIView
 
+/** 三角形的颜色 */
+@property (nonatomic, strong) UIColor *triangleColor;
+
 @end

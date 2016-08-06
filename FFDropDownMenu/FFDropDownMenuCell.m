@@ -14,21 +14,64 @@
 @interface FFDropDownMenuCell ()
 
 /** 图片 */
-@property (weak, nonatomic) IBOutlet UIImageView *customImageView;
+@property (weak, nonatomic) UIImageView *customImageView;
 
 /** 标题 */
-@property (weak, nonatomic) IBOutlet UILabel *customTitleLabel;
+@property (weak, nonatomic) UILabel *customTitleLabel;
 
+/** 底部分割线 */
+@property (nonatomic, weak) UIView *separaterView;
 @end
 
 @implementation FFDropDownMenuCell
 
-- (void)setMenuModel:(FFDropDownMenuModel *)menuModel {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        //初始化子控件
+        UIImageView *customImageView = [[UIImageView alloc] init];
+        customImageView.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:customImageView];
+        self.customImageView = customImageView;
+        
+        UILabel *customTitleLabel = [[UILabel alloc] init];
+        customTitleLabel.font = [UIFont systemFontOfSize:15];
+        [self addSubview:customTitleLabel];
+        self.customTitleLabel = customTitleLabel;
+        
+        UIView *separaterView = [[UIView alloc] init];
+        separaterView.backgroundColor = [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:240 / 255.0 alpha:1];
+        [self addSubview:separaterView];
+        self.separaterView = separaterView;
+    }
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    //frame的赋值
+    CGFloat separaterHeight = 1; //底部分割线高度
+    
+    //图片 customImageView
+    CGFloat imageViewMargin = 3;
+    CGFloat imageViewH = self.frame.size.height - 2 * imageViewMargin;
+    self.customImageView.frame = CGRectMake(10, imageViewMargin, imageViewH, imageViewH);
+    
+    //标题
+    CGFloat labelX = CGRectGetMaxX(self.customImageView.frame) + 10;
+    self.customTitleLabel.frame = CGRectMake(labelX, 0, self.frame.size.width - labelX, self.frame.size.height - separaterHeight);
+    
+    //分割线
+    self.separaterView.frame = CGRectMake(0, self.frame.size.height - separaterHeight, self.frame.size.width, separaterHeight);
+}
+
+
+- (void)setMenuModel:(id)menuModel {
     _menuModel = menuModel;
     
-    self.customTitleLabel.text = menuModel.menuItemTitle;
+    FFDropDownMenuModel *realMenuModel = (FFDropDownMenuModel *)menuModel;
+    self.customTitleLabel.text = realMenuModel.menuItemTitle;
     //给imageView赋值
-    self.customImageView.image = [UIImage imageNamed:menuModel.menuItemIconName];
+    self.customImageView.image = [UIImage imageNamed:realMenuModel.menuItemIconName];
 }
 
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0478C77D1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478C77C1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m */; };
+		04B7FD201D559207001E306E /* FFDropDownMenuBasedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B7FD1F1D559207001E306E /* FFDropDownMenuBasedModel.m */; };
+		04B7FD241D55B9E9001E306E /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B7FD221D55B9E9001E306E /* TableViewCell.m */; };
+		04B7FD251D55B9E9001E306E /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B7FD231D55B9E9001E306E /* TableViewCell.xib */; };
 		04EA729C1D54884200D942D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04EA729B1D54884200D942D5 /* Assets.xcassets */; };
 		04EA729F1D54884200D942D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EA729D1D54884200D942D5 /* LaunchScreen.storyboard */; };
 		04EA72AA1D54884200D942D5 /* FFDropDownMenuDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA72A91D54884200D942D5 /* FFDropDownMenuDemoTests.m */; };
@@ -16,7 +20,6 @@
 		04EA72D01D548B0300D942D5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04EA72CC1D548B0300D942D5 /* Info.plist */; };
 		04EA72D61D548DB900D942D5 /* FFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA72D31D548DB900D942D5 /* FFHomeViewController.m */; };
 		04EA72E11D548E3900D942D5 /* FFDropDownMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA72D91D548E3900D942D5 /* FFDropDownMenuCell.m */; };
-		04EA72E21D548E3900D942D5 /* FFDropDownMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA72DA1D548E3900D942D5 /* FFDropDownMenuCell.xib */; };
 		04EA72E31D548E3900D942D5 /* FFDropDownMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA72DC1D548E3900D942D5 /* FFDropDownMenuModel.m */; };
 		04EA72E41D548E3900D942D5 /* FFDropDownMenuTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA72DE1D548E3900D942D5 /* FFDropDownMenuTriangleView.m */; };
 		04EA72E51D548E3900D942D5 /* FFDropDownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA72E01D548E3900D942D5 /* FFDropDownMenuView.m */; };
@@ -40,6 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0478C77B1D54DF040046D8E6 /* FFDropDownMenuBasedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedCell.h; sourceTree = "<group>"; };
+		0478C77C1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuBasedCell.m; sourceTree = "<group>"; };
+		04B7FD1E1D559207001E306E /* FFDropDownMenuBasedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedModel.h; sourceTree = "<group>"; };
+		04B7FD1F1D559207001E306E /* FFDropDownMenuBasedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuBasedModel.m; sourceTree = "<group>"; };
+		04B7FD211D55B9E9001E306E /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		04B7FD221D55B9E9001E306E /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		04B7FD231D55B9E9001E306E /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		04EA728C1D54884200D942D5 /* FFDropDownMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFDropDownMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04EA729B1D54884200D942D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		04EA729E1D54884200D942D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,7 +67,6 @@
 		04EA72D31D548DB900D942D5 /* FFHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHomeViewController.m; sourceTree = "<group>"; };
 		04EA72D81D548E3900D942D5 /* FFDropDownMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuCell.h; sourceTree = "<group>"; };
 		04EA72D91D548E3900D942D5 /* FFDropDownMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuCell.m; sourceTree = "<group>"; };
-		04EA72DA1D548E3900D942D5 /* FFDropDownMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FFDropDownMenuCell.xib; sourceTree = "<group>"; };
 		04EA72DB1D548E3900D942D5 /* FFDropDownMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuModel.h; sourceTree = "<group>"; };
 		04EA72DC1D548E3900D942D5 /* FFDropDownMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuModel.m; sourceTree = "<group>"; };
 		04EA72DD1D548E3900D942D5 /* FFDropDownMenuTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuTriangleView.h; sourceTree = "<group>"; };
@@ -213,6 +222,9 @@
 		04EA72D51D548DB900D942D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04B7FD211D55B9E9001E306E /* TableViewCell.h */,
+				04B7FD221D55B9E9001E306E /* TableViewCell.m */,
+				04B7FD231D55B9E9001E306E /* TableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,9 +232,12 @@
 		04EA72D71D548E3900D942D5 /* FFDropDownMenu */ = {
 			isa = PBXGroup;
 			children = (
+				0478C77B1D54DF040046D8E6 /* FFDropDownMenuBasedCell.h */,
+				0478C77C1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m */,
 				04EA72D81D548E3900D942D5 /* FFDropDownMenuCell.h */,
 				04EA72D91D548E3900D942D5 /* FFDropDownMenuCell.m */,
-				04EA72DA1D548E3900D942D5 /* FFDropDownMenuCell.xib */,
+				04B7FD1E1D559207001E306E /* FFDropDownMenuBasedModel.h */,
+				04B7FD1F1D559207001E306E /* FFDropDownMenuBasedModel.m */,
 				04EA72DB1D548E3900D942D5 /* FFDropDownMenuModel.h */,
 				04EA72DC1D548E3900D942D5 /* FFDropDownMenuModel.m */,
 				04EA72DD1D548E3900D942D5 /* FFDropDownMenuTriangleView.h */,
@@ -300,6 +315,7 @@
 				TargetAttributes = {
 					04EA728B1D54884200D942D5 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = JBXHYHBH5E;
 					};
 					04EA72A41D54884200D942D5 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -337,7 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EA72D01D548B0300D942D5 /* Info.plist in Resources */,
-				04EA72E21D548E3900D942D5 /* FFDropDownMenuCell.xib in Resources */,
+				04B7FD251D55B9E9001E306E /* TableViewCell.xib in Resources */,
 				04EA729F1D54884200D942D5 /* LaunchScreen.storyboard in Resources */,
 				04EA729C1D54884200D942D5 /* Assets.xcassets in Resources */,
 			);
@@ -365,6 +381,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EA72E51D548E3900D942D5 /* FFDropDownMenuView.m in Sources */,
+				0478C77D1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m in Sources */,
+				04B7FD201D559207001E306E /* FFDropDownMenuBasedModel.m in Sources */,
+				04B7FD241D55B9E9001E306E /* TableViewCell.m in Sources */,
 				04EA72E41D548E3900D942D5 /* FFDropDownMenuTriangleView.m in Sources */,
 				04EA72D61D548DB900D942D5 /* FFHomeViewController.m in Sources */,
 				04EA72E31D548E3900D942D5 /* FFDropDownMenuModel.m in Sources */,
@@ -504,7 +523,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/FFDropDownMenuDemo/Resources/plist文件/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chenfanfang.FFDropDownMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -515,7 +536,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/FFDropDownMenuDemo/Resources/plist文件/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chenfanfang.FFDropDownMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

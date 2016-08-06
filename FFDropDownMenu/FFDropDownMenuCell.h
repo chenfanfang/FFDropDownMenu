@@ -6,15 +6,11 @@
 //  Copyright © 2016年 chenfanfang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-@class FFDropDownMenuModel;
+#import "FFDropDownMenuBasedCell.h"
 
 /**
  *  下拉菜单cell
  */
-@interface FFDropDownMenuCell : UITableViewCell
-
-/** 菜单模型 */
-@property (nonatomic, strong) FFDropDownMenuModel *menuModel;
+@interface FFDropDownMenuCell : FFDropDownMenuBasedCell
 
 @end
