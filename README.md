@@ -208,11 +208,20 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 ===
 
 ###【自定义菜单选项 -- xib方式】
-- http://www.jianshu.com/p/6a42a35ae2db
+-  http://www.jianshu.com/p/6a42a35ae2db
+
+![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/35d221a5f6ecd4a0956bd4d7652f91495beee5ea/FFDropDownMenuDemo/Resources/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F(xib)/customMenuStyleXib.png)
 
 
+---
+---
+---
+---
 ###【自定义菜单选项 -- 非xib方式】
 - http://www.jianshu.com/p/eead6fe4d59f
+
+![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/35d221a5f6ecd4a0956bd4d7652f91495beee5ea/FFDropDownMenuDemo/Resources/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F(%E9%9D%9Exib)/customMenuStyle.png)
+
 
 
 ## 期待
