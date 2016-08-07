@@ -125,7 +125,6 @@
 			children = (
 				04EA72C21D548B0300D942D5 /* Classes */,
 				04EA72CA1D548B0300D942D5 /* Resources */,
-				04EA728F1D54884200D942D5 /* Supporting Files */,
 			);
 			path = FFDropDownMenuDemo;
 			sourceTree = "<group>";
@@ -135,6 +134,7 @@
 			children = (
 			);
 			name = "Supporting Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		04EA72A81D54884200D942D5 /* FFDropDownMenuDemoTests */ = {
@@ -188,6 +188,7 @@
 		04EA72CA1D548B0300D942D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04EA728F1D54884200D942D5 /* Supporting Files */,
 				04EA729B1D54884200D942D5 /* Assets.xcassets */,
 				04EA729D1D54884200D942D5 /* LaunchScreen.storyboard */,
 				04EA72CB1D548B0300D942D5 /* plist文件 */,
