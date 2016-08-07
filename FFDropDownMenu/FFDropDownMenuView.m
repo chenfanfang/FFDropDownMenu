@@ -102,33 +102,6 @@
 }
 
 
-+ (instancetype)ff_DropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray cellClassName:(NSString *)cellClassName menuWidth:(CGFloat)menuWidth menuCornerRadius:(CGFloat)menuCornerRadius eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleColor:(UIColor *)triangleColor triangleY:(CGFloat)triangleY triangleRightMargin:(CGFloat)triangleRightMargin triangleSize:(CGSize)triangleSize bgColorBeginAlpha:(CGFloat)bgColorBeginAlpha bgColorEndAlpha:(CGFloat)bgColorEndAlpha animateDuration:(CGFloat)animateDuration menuScaleType:(FFDropDownMenuViewScaleType)menuScaleType {
-    
-    FFDropDownMenuView *menuView = [FFDropDownMenuView new];
-    //属性的赋值
-    menuView.menuModelsArray = menuModelsArray;
-    menuView.cellClassName = cellClassName;
-    menuView.menuWidth = menuWidth;
-    menuView.menuCornerRadius = menuCornerRadius;
-    menuView.eachMenuItemHeight = eachItemHeight;
-    menuView.menuRightMargin = menuRightMargin;
-    menuView.triangleColor = triangleColor;
-    menuView.triangleY = triangleY;
-    menuView.realTriangleY = menuView.triangleY;
-    menuView.triangleRightMargin = triangleRightMargin;
-    menuView.triangleSize = triangleSize;
-    menuView.bgColorbeginAlpha = bgColorBeginAlpha;
-    menuView.bgColorEndAlpha = bgColorEndAlpha;
-    menuView.animateDuration = animateDuration;
-    menuView.menuScaleType = menuScaleType;
-    
-    //初始化
-    [menuView setup];
-    
-    return menuView;
-}
-
-
 
 /***********************************懒加载***********************************/
 #pragma mark - 懒加载
@@ -138,6 +111,7 @@ static NSString *const CellID = @"CellID";
 - (UITableView *)tableView {
     if (_tableView == nil) {
         UITableView *tableView = [[UITableView alloc] init];
+        tableView.backgroundColor = [UIColor clearColor];
         [self addSubview:tableView];
         _tableView = tableView;
         tableView.delegate = self;

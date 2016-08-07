@@ -27,6 +27,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
         //初始化子控件
         UIImageView *customImageView = [[UIImageView alloc] init];
         customImageView.contentMode = UIViewContentModeScaleToFill;

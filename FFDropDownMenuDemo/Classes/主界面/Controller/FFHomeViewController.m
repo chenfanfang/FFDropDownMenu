@@ -58,10 +58,9 @@
     
     //手机QQ首页的图片
     self.view.backgroundColor = [UIColor whiteColor];
-    CGSize size = [UIScreen mainScreen].bounds.size;
-    CGFloat marign = 5;
-    UIImageView *homeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(marign, 15, size.width - 2 * marign, size.height)];
-    //homeImageView.image = [UIImage imageNamed:@"QQHomeBg"];
+    UIImageView *homeImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    homeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    homeImageView.image = [UIImage imageNamed:@"background"];
     [self.view addSubview:homeImageView];
     
 }
@@ -87,51 +86,55 @@
         __weak typeof(self) weakSelf = self;
         
         //菜单模型0
-        FFDropDownMenuModel *menuModel0 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"多人聊天" menuItemIconName:@"menu0" menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor yellowColor];
-            vc.navigationItem.title = @"多人聊天";
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }];
-        //菜单模型1
-        FFDropDownMenuModel *menuModel1 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"加好友" menuItemIconName:@"menu1" menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor orangeColor];
-            vc.navigationItem.title = @"加好友";
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }];
-        //菜单模型2
-        FFDropDownMenuModel *menuModel2 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"扫一扫" menuItemIconName:@"menu2"  menuBlock:^{
+        FFDropDownMenuModel *menuModel0 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"QQ" menuItemIconName:@"menu2"  menuBlock:^{
             UIViewController *vc = [UIViewController new];
             vc.view.backgroundColor = [UIColor blueColor];
-            vc.navigationItem.title = @"扫一扫";
+            vc.navigationItem.title = @"QQ";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
+        
+        
+        //菜单模型1
+        FFDropDownMenuModel *menuModel1 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Line" menuItemIconName:@"menu1" menuBlock:^{
+            UIViewController *vc = [UIViewController new];
+            vc.view.backgroundColor = [UIColor orangeColor];
+            vc.navigationItem.title = @"Line";
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
+        
+        //菜单模型2
+        FFDropDownMenuModel *menuModel2 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Twitter" menuItemIconName:@"menu0" menuBlock:^{
+            UIViewController *vc = [UIViewController new];
+            vc.view.backgroundColor = [UIColor yellowColor];
+            vc.navigationItem.title = @"Twitter";
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
+        
         //菜单模型3
-        FFDropDownMenuModel *menuModel3 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"发送到电脑" menuItemIconName:@"menu3"  menuBlock:^{
+        FFDropDownMenuModel *menuModel3 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"QZone" menuItemIconName:@"menu3"  menuBlock:^{
             UIViewController *vc = [UIViewController new];
             vc.view.backgroundColor = [UIColor greenColor];
-            vc.navigationItem.title = @"发送到电脑";
+            vc.navigationItem.title = @"QZone";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         //菜单模型4
-        FFDropDownMenuModel *menuModel4 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"面对面快传" menuItemIconName:@"menu4"  menuBlock:^{
+        FFDropDownMenuModel *menuModel4 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"WeChat" menuItemIconName:@"menu4"  menuBlock:^{
             UIViewController *vc = [UIViewController new];
             vc.view.backgroundColor = [UIColor purpleColor];
-            vc.navigationItem.title = @"面对面快传";
+            vc.navigationItem.title = @"WeChat";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         //菜单模型5
-        FFDropDownMenuModel *menuModel5 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"付款" menuItemIconName:@"menu5"  menuBlock:^{
+        FFDropDownMenuModel *menuModel5 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Facebook" menuItemIconName:@"menu5"  menuBlock:^{
             UIViewController *vc = [UIViewController new];
             vc.view.backgroundColor = [UIColor yellowColor];
-            vc.navigationItem.title = @"付款";
+            vc.navigationItem.title = @"Facebook";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
     
         NSArray *menuModelArr = @[menuModel0, menuModel1, menuModel2, menuModel3, menuModel4, menuModel5];
         
-        _dropdownMenu = [FFDropDownMenuView ff_DropDownMenuWithMenuModelsArray:menuModelArr cellClassName:FFDefaultCell menuWidth:FFDefaultFloat menuCornerRadius:FFDefaultFloat eachItemHeight:FFDefaultFloat menuRightMargin:FFDefaultFloat triangleColor:FFDefaultColor triangleY:FFDefaultFloat triangleRightMargin:FFDefaultFloat triangleSize:FFDefaultSize bgColorBeginAlpha:FFDefaultFloat bgColorEndAlpha:FFDefaultFloat animateDuration:FFDefaultFloat menuScaleType:FFDropDownMenuViewScaleType_TopRight];
+        _dropdownMenu = [FFDropDownMenuView ff_DefaultStyleDropDownMenuWithMenuModelsArray:menuModelArr menuWidth:FFDefaultFloat eachItemHeight:FFDefaultFloat menuRightMargin:FFDefaultFloat triangleRightMargin:FFDefaultFloat];
         
     }
     return _dropdownMenu;
