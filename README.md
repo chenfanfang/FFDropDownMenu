@@ -10,8 +10,10 @@ github地址:https://github.com/chenfanfang/FFDropDownMenu
 先浏览下效果图：
 
 
-![仿手机QQ下拉菜单.png](http://upload-images.jianshu.io/upload_images/1594675-c8959e91b20bb4f9.png)
+![仿手机QQ下拉菜单.gif](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/d0c70565712fe4d5b28842517ef55fcc9a50a140/FFDropDownMenuDemo/Resources/%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%88%E6%9E%9C%E5%9B%BE/basicUsage2.gif)
 
+
+![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/d0c70565712fe4d5b28842517ef55fcc9a50a140/FFDropDownMenuDemo/Resources/%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%88%E6%9E%9C%E5%9B%BE/basicUsage1.png)
 
 
 
