@@ -13,11 +13,16 @@
 
 
 //宏
+
+//默认值
 #define FFDefaultFloat -10.0
 #define FFDefaultSize CGSizeMake(20, 10)
 #define FFDefaultCell @"FFDropDownMenuCell"
 #define FFDefaultColor [UIColor whiteColor]
 #define FFDefaultMenuScaleType FFDropDownMenuViewScaleType_TopRight
+
+//rgb颜色 r-red 、  g-green  、  b-blue  、 a-alpha
+#define FFColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 /**
  *  菜单的伸缩类型
@@ -106,28 +111,31 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
 /** 6、菜单条离屏幕右边的间距(若不设置，默认为10) */
 @property (nonatomic, assign) CGFloat menuRightMargin;
 
-/** 7、三角形颜色(若不设置，默认为白色) */
+/** 7、菜单选项的背景颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) */
+@property (nonatomic, strong) UIColor *menuItemBackgroundColor;
+
+/** 8、三角形颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) */
 @property (nonatomic, strong) UIColor *triangleColor;
 
-/** 8、三角形相对于keyWindow的y值,也就是相对于屏幕顶部的y值(若不设置，默认为64) */
+/** 9、三角形相对于keyWindow的y值,也就是相对于屏幕顶部的y值(若不设置，默认为64) */
 @property (nonatomic, assign) CGFloat triangleY;
 
-/** 9、三角形距离屏幕右边的间距(若不设置，默认为20) */
+/** 10、三角形距离屏幕右边的间距(若不设置，默认为20) */
 @property (nonatomic, assign) CGFloat triangleRightMargin;
 
-/** 10、三角形的size  size.width:代表三角形底部边长，size.Height:代表三角形的高度(若不设置，默认为CGSizeMake(15, 10)) */
+/** 11、三角形的size  size.width:代表三角形底部边长，size.Height:代表三角形的高度(若不设置，默认为CGSizeMake(15, 10)) */
 @property (nonatomic, assign) CGSize triangleSize;
 
-/** 11、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02) */
+/** 12、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02) */
 @property (nonatomic, assign) CGFloat bgColorbeginAlpha;
 
-/** 12、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2) */
+/** 13、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2) */
 @property (nonatomic, assign) CGFloat bgColorEndAlpha;
 
-/** 13、动画效果时间(若不设置，默认为0.2) */
+/** 14、动画效果时间(若不设置，默认为0.2) */
 @property (nonatomic, assign) CGFloat animateDuration;
 
-/** 14、菜单的伸缩类型 */
+/** 15、菜单的伸缩类型 */
 @property (nonatomic, assign) FFDropDownMenuViewScaleType menuScaleType;
 
 

@@ -50,6 +50,7 @@
         self.menuCornerRadius = 5;
         self.eachMenuItemHeight = 40;
         self.menuRightMargin = 10;
+        self.menuItemBackgroundColor = [UIColor whiteColor];
         self.triangleColor = [UIColor whiteColor];
         self.triangleY = 64;
         self.realTriangleY = self.triangleY;
@@ -203,10 +204,11 @@ static NSString *const CellID = @"CellID";
     
     self.tableView.frame = CGRectMake(screenWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
     
+    [self.tableView reloadData];
 }
 
 
-/***********************************UITableViewDataSource***********************************/
+/***********************************UITableViewDataSource*********************/
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.menuModelsArray.count;
@@ -220,13 +222,14 @@ static NSString *const CellID = @"CellID";
     }
     
     FFDropDownMenuBasedCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
+    cell.backgroundColor = self.menuItemBackgroundColor;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     FFDropDownMenuBasedModel *menuModel = self.menuModelsArray[indexPath.row];
     cell.menuModel = menuModel;
     return cell;
 }
 
-/***********************************UITableViewDelegate***********************************/
+/*****************************UITableViewDelegate*****************************/
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.isShow == YES) {
@@ -348,45 +351,50 @@ static NSString *const CellID = @"CellID";
     }
 }
 
-- (void)setTriangleColor:(UIColor *)triangleColor {//7
+- (void)setMenuItemBackgroundColor:(UIColor *)menuItemBackgroundColor { //7
+    _menuItemBackgroundColor = menuItemBackgroundColor;
+    
+}
+
+- (void)setTriangleColor:(UIColor *)triangleColor {//8
     _triangleColor = triangleColor;
 }
 
-- (void)setTriangleY:(CGFloat)triangleY {//8
+- (void)setTriangleY:(CGFloat)triangleY {//9
     if (triangleY != FFDefaultFloat) {
         _triangleY = triangleY;
     }
 }
 
-- (void)setTriangleRightMargin:(CGFloat)triangleRightMargin {//9
+- (void)setTriangleRightMargin:(CGFloat)triangleRightMargin {//10
     if (triangleRightMargin != FFDefaultFloat) {
         _triangleRightMargin = triangleRightMargin;
     }
 }
 
-- (void)setTriangleSize:(CGSize)triangleSize {//10
+- (void)setTriangleSize:(CGSize)triangleSize {//11
     _triangleSize = triangleSize;
 }
 
-- (void)setBgColorbeginAlpha:(CGFloat)bgColorbeginAlpha {//11
+- (void)setBgColorbeginAlpha:(CGFloat)bgColorbeginAlpha {//12
     if (bgColorbeginAlpha != FFDefaultFloat) {
         _bgColorbeginAlpha = bgColorbeginAlpha;
     }
 }
 
-- (void)setBgColorEndAlpha:(CGFloat)bgColorEndAlpha {//12
+- (void)setBgColorEndAlpha:(CGFloat)bgColorEndAlpha {//13
     if (bgColorEndAlpha != FFDefaultFloat) {
         _bgColorEndAlpha = bgColorEndAlpha;
     }
 }
 
-- (void)setAnimateDuration:(CGFloat)animateDuration {//13
+- (void)setAnimateDuration:(CGFloat)animateDuration {//14
     if (animateDuration != FFDefaultFloat) {
         _animateDuration = animateDuration;
     }
 }
 
-- (void)setMenuScaleType:(FFDropDownMenuViewScaleType)menuScaleType {//14
+- (void)setMenuScaleType:(FFDropDownMenuViewScaleType)menuScaleType {//15
     _menuScaleType = menuScaleType;
 }
 
