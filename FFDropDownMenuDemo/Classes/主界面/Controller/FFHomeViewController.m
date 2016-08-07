@@ -120,8 +120,8 @@
     //导航栏的设置
     
     //导航栏背景图
-    UIImage *backgroundImage = [self imageWithColor:[UIColor colorWithRed:67/255.0 green:135/255.0 blue:229/255.0 alpha:1] size:CGSizeMake([UIScreen mainScreen].bounds.size.width, 64)];
-    [self.navigationController.navigationBar setBackgroundImage:backgroundImage forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    UIImage *bgImage = [self imageWithColor:[UIColor colorWithRed:25 / 255.0 green:168 / 255.0 blue:243 / 255.0 alpha:1] size:CGSizeMake(1000, 100)];
+    [self.navigationController.navigationBar setBackgroundImage:bgImage forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     //titleView
