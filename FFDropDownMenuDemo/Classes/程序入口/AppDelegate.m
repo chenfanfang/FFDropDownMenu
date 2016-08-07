@@ -24,6 +24,12 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[FFHomeViewController new]];
+    [nav.navigationBar setTitleTextAttributes:@{
+                                                 NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
+                                                 NSForegroundColorAttributeName : [UIColor whiteColor]
+                                                 
+                                                 }];
+    
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     

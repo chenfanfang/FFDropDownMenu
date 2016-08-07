@@ -8,6 +8,11 @@
 
 #import "FFHomeViewController.h"
 
+//controller
+#import "FFMenuViewController.h"
+
+
+//view
 #import "FFDropDownMenuView.h"
 
 
@@ -87,8 +92,8 @@
         
         //菜单模型0
         FFDropDownMenuModel *menuModel0 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"QQ" menuItemIconName:@"menu2"  menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor blueColor];
+            FFMenuViewController *vc = [FFMenuViewController new];
+            vc.backgroundImageName = @"menuBackground";
             vc.navigationItem.title = @"QQ";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
@@ -96,38 +101,38 @@
         
         //菜单模型1
         FFDropDownMenuModel *menuModel1 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Line" menuItemIconName:@"menu1" menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor orangeColor];
+            FFMenuViewController *vc = [FFMenuViewController new];
+            vc.backgroundImageName = @"menuBackground";
             vc.navigationItem.title = @"Line";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         
         //菜单模型2
         FFDropDownMenuModel *menuModel2 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Twitter" menuItemIconName:@"menu0" menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor yellowColor];
+            FFMenuViewController *vc = [FFMenuViewController new];
+            vc.backgroundImageName = @"menuBackground";
             vc.navigationItem.title = @"Twitter";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         
         //菜单模型3
         FFDropDownMenuModel *menuModel3 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"QZone" menuItemIconName:@"menu3"  menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor greenColor];
+            FFMenuViewController *vc = [FFMenuViewController new];
+            vc.backgroundImageName = @"menuBackground";
             vc.navigationItem.title = @"QZone";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         //菜单模型4
         FFDropDownMenuModel *menuModel4 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"WeChat" menuItemIconName:@"menu4"  menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor purpleColor];
+            FFMenuViewController *vc = [FFMenuViewController new];
+            vc.backgroundImageName = @"menuBackground";
             vc.navigationItem.title = @"WeChat";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         //菜单模型5
         FFDropDownMenuModel *menuModel5 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Facebook" menuItemIconName:@"menu5"  menuBlock:^{
-            UIViewController *vc = [UIViewController new];
-            vc.view.backgroundColor = [UIColor yellowColor];
+            FFMenuViewController *vc = [FFMenuViewController new];
+            vc.backgroundImageName = @"menuBackground";
             vc.navigationItem.title = @"Facebook";
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];

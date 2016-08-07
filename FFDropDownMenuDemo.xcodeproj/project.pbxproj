@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045681851D57021700A0DBB2 /* FFMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045681831D57021700A0DBB2 /* FFMenuViewController.m */; };
+		045681861D57021700A0DBB2 /* FFMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045681841D57021700A0DBB2 /* FFMenuViewController.xib */; };
 		0478C77D1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478C77C1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m */; };
 		04B7FD201D559207001E306E /* FFDropDownMenuBasedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B7FD1F1D559207001E306E /* FFDropDownMenuBasedModel.m */; };
 		04EA729C1D54884200D942D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04EA729B1D54884200D942D5 /* Assets.xcassets */; };
@@ -41,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		045681821D57021700A0DBB2 /* FFMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMenuViewController.h; sourceTree = "<group>"; };
+		045681831D57021700A0DBB2 /* FFMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMenuViewController.m; sourceTree = "<group>"; };
+		045681841D57021700A0DBB2 /* FFMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FFMenuViewController.xib; sourceTree = "<group>"; };
 		0478C77B1D54DF040046D8E6 /* FFDropDownMenuBasedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedCell.h; sourceTree = "<group>"; };
 		0478C77C1D54DF040046D8E6 /* FFDropDownMenuBasedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuBasedCell.m; sourceTree = "<group>"; };
 		04B7FD1E1D559207001E306E /* FFDropDownMenuBasedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedModel.h; sourceTree = "<group>"; };
@@ -203,6 +208,9 @@
 			children = (
 				04EA72D21D548DB900D942D5 /* FFHomeViewController.h */,
 				04EA72D31D548DB900D942D5 /* FFHomeViewController.m */,
+				045681821D57021700A0DBB2 /* FFMenuViewController.h */,
+				045681831D57021700A0DBB2 /* FFMenuViewController.m */,
+				045681841D57021700A0DBB2 /* FFMenuViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -345,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EA72D01D548B0300D942D5 /* Info.plist in Resources */,
+				045681861D57021700A0DBB2 /* FFMenuViewController.xib in Resources */,
 				04EA729F1D54884200D942D5 /* LaunchScreen.storyboard in Resources */,
 				04EA729C1D54884200D942D5 /* Assets.xcassets in Resources */,
 			);
@@ -378,6 +387,7 @@
 				04EA72D61D548DB900D942D5 /* FFHomeViewController.m in Sources */,
 				04EA72E31D548E3900D942D5 /* FFDropDownMenuModel.m in Sources */,
 				04EA72E11D548E3900D942D5 /* FFDropDownMenuCell.m in Sources */,
+				045681851D57021700A0DBB2 /* FFMenuViewController.m in Sources */,
 				04EA72CF1D548B0300D942D5 /* main.m in Sources */,
 				04EA72CE1D548B0300D942D5 /* AppDelegate.m in Sources */,
 			);
