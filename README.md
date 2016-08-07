@@ -3,10 +3,8 @@ FFDropDownMenu
 - 一款类似手机QQ下拉菜单框架。
 - 自由度高，可以自定义菜单的样式
 
-===
-===
-
-- github地址:https://github.com/chenfanfang/FFDropDownMenu
+---
+---
 
 - 更多的使用方法的demo地址:https://github.com/chenfanfang/CollectionsOfExample
 
@@ -25,7 +23,7 @@ FFDropDownMenu
 
 
 
-## <a id="Installation"></a> Installation【安装】
+## Installation【安装】
 
 ### From CocoaPods【使用CocoaPods】
 
@@ -213,8 +211,8 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 ![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/35d221a5f6ecd4a0956bd4d7652f91495beee5ea/FFDropDownMenuDemo/Resources/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F(xib)/customMenuStyleXib.png)
 
 
----
----
+
+
 ---
 ---
 ###【自定义菜单选项 -- 非xib方式】
@@ -223,6 +221,8 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 ![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/35d221a5f6ecd4a0956bd4d7652f91495beee5ea/FFDropDownMenuDemo/Resources/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F(%E9%9D%9Exib)/customMenuStyle.png)
 
 
+---
+---
 
 ## 期待
 * 如果在使用过程中遇到BUG，希望你能在 简书私信我，或者在我简书专题的博客进行评论。谢谢（或者尝试下载最新的框架代码看看BUG修复没有）
