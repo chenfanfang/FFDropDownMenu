@@ -1,12 +1,20 @@
-最近写了这个框架: FFDropDownMenu,类似手机QQ下拉菜单。
+FFDropDownMenu
+===
+- 一款类似手机QQ下拉菜单框架。
+- 自由度高，可以自定义菜单的样式
 
-github地址:https://github.com/chenfanfang/FFDropDownMenu
+===
+===
 
-更多的使用方法的demo地址:https://github.com/chenfanfang/CollectionsOfExample
+- github地址:https://github.com/chenfanfang/FFDropDownMenu
 
-更多的使用方法的博客地址:https://github.com/chenfanfang/CollectionsOfExample
+- 更多的使用方法的demo地址:https://github.com/chenfanfang/CollectionsOfExample
+
+- 更多的使用方法的博客地址:http://www.jianshu.com/notebooks/5552428/latest
 
 
+---
+---
 先浏览下效果图：
 
 
@@ -41,7 +49,7 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 
 ```
 
-##<a id="Examples"></a>Basic Usage 【基本的使用】
+##【基本的使用】
 
 先导入头文件
 ```objc
@@ -192,6 +200,20 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 ```objc
     [self.dropDownMenu showMenu];
 ```
+
+---
+---
+
+若觉得框架自带的菜单样式不是自己喜欢的，或者需要给菜单选项添加更多的子控件，可以通过自定义菜单选项来实现，具体使用方式，点击下面两个链接查看即可。
+===
+
+###【自定义菜单选项 -- xib方式】
+- http://www.jianshu.com/p/6a42a35ae2db
+
+
+###【自定义菜单选项 -- 非xib方式】
+- http://www.jianshu.com/p/eead6fe4d59f
+
 
 ## 期待
 * 如果在使用过程中遇到BUG，希望你能在 简书私信我，或者在我简书专题的博客进行评论。谢谢（或者尝试下载最新的框架代码看看BUG修复没有）
