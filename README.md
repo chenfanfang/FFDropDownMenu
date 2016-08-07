@@ -10,12 +10,12 @@ github地址:https://github.com/chenfanfang/FFDropDownMenu
 先浏览下效果图：
 
 
-![仿手机QQ下拉菜单.gif](http://upload-images.jianshu.io/upload_images/1594675-50fc56a477704ccd.gif?imageMogr2/auto-orient/strip)
+![仿手机QQ下拉菜单.gif](http://upload-images.jianshu.io/upload_images/1594675-50fc56a477704ccd.gif)
 
 
 
 
-![仿手机QQ下拉菜单.png](http://upload-images.jianshu.io/upload_images/1594675-c8959e91b20bb4f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![仿手机QQ下拉菜单.png](http://upload-images.jianshu.io/upload_images/1594675-c8959e91b20bb4f9.png)
 
 
 
