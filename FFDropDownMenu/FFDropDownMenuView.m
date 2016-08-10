@@ -8,16 +8,8 @@
 
 #import "FFDropDownMenuView.h"
 
-//cell
-#import "FFDropDownMenuBasedCell.h" //下拉菜单基类cell
-
 //view
-#import "FFDropDownMenuTriangleView.h" //下拉菜单的三角形
-
-//model
-#import "FFDropDownMenuBasedModel.h"
-
-
+#import "FFDropDownMenuTriangleView.h"
 
 
 @interface FFDropDownMenuView ()<UITableViewDataSource, UITableViewDelegate>
@@ -59,13 +51,18 @@
         self.bgColorbeginAlpha = 0.02;
         self.bgColorEndAlpha = 0.2;
         self.animateDuration = 0.2;
-        self.menuScaleType = FFDropDownMenuViewScaleType_TopRight;
+        self.menuAnimateType = FFDropDownMenuViewAnimateType_ScaleBasedTopRight;
         
         self.isCellCorrect = NO;
         self.isShow = NO;
         
         //监听状态栏高度改变的通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarHeightChanged:) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
+        
+        //监听状态栏的旋转
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+
+        
     }
     return self;
 }
@@ -74,21 +71,55 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+/** 横竖屏的改变 */
+- (void)statusBarOrientationChange:(NSNotification *)note {
+    [self setup];
+}
+
+/** 状态栏frame的变化 */
 - (void)statusBarHeightChanged:(NSNotification *)note {
-    
     CGRect statusBarFrame = [note.userInfo[UIApplicationStatusBarFrameUserInfoKey] CGRectValue];
-    CGFloat statusBarHeight = statusBarFrame.size.height;
-    if (statusBarHeight == 20) {
-        self.realTriangleY = self.triangleY;
+
+    //正常的状态栏高度是20
+    CGFloat normalStatusBarHeight = 20;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    NSLog(@"%@",NSStringFromCGRect(statusBarFrame));
+    
+    
+    CGFloat screenWidth = 0;
+    CGFloat screenHeight = 0;
+    if (screenSize.height > screenSize.width) {
+        screenWidth = screenSize.width;
+        screenHeight = screenSize.height;
+    }
+    
+    else {
+        screenWidth = screenSize.height;
+        screenHeight = screenSize.width;
+    }
+    
+    
+    //横屏
+    if (statusBarFrame.origin.y >= screenWidth || //横屏: statusBarFrame = {{0, 375}, {0, 0}}
+        statusBarFrame.size.width >= screenHeight ) {//横屏: statusBarFrame = {{0, 0}, {667, 20}}
+        self.realTriangleY = self.triangleY - (44 - 32) - normalStatusBarHeight; //竖屏导航栏44， 横屏:32
         
-    } else {
-        self.realTriangleY = self.triangleY + 20;
+    } else { //竖屏
+        if (statusBarFrame.size.height == 0) {
+            self.realTriangleY = self.triangleY;
+            
+        } else {
+            self.realTriangleY = self.triangleY + (statusBarFrame.size.height - normalStatusBarHeight);
+        }
+        
     }
     
     [self setup];
 }
 
-+ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray<FFDropDownMenuModel *> *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin {
+
++ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin {
     
     FFDropDownMenuView *menuView = [FFDropDownMenuView new];
     
@@ -121,14 +152,14 @@ static NSString *const CellID = @"CellID";
         tableView.clipsToBounds = YES;
         tableView.layer.cornerRadius = self.menuCornerRadius;
         //锚点设置成右上角，进行frame的设置需要注意
-        switch (self.menuScaleType) {
-            case FFDropDownMenuViewScaleType_TopRight: //右上角
+        switch (self.menuAnimateType) {
+            case FFDropDownMenuViewAnimateType_ScaleBasedTopRight: //右上角
                 tableView.layer.anchorPoint = CGPointMake(1, 0);
                 break;
-            case FFDropDownMenuViewScaleType_TopLeft: //左上角
+            case FFDropDownMenuViewAnimateType_ScaleBasedTopLeft: //左上角
                 tableView.layer.anchorPoint = CGPointMake(0, 0);
                 break;
-            case FFDropDownMenuViewScaleType_Middle: //中间
+            case FFDropDownMenuViewAnimateType_ScaleBasedMiddle: //中间
                 break;
                 
             default:
@@ -192,17 +223,23 @@ static NSString *const CellID = @"CellID";
     [_tableView removeFromSuperview];
     _tableView = nil;
     
+    //屏幕的size
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    
     //设置view的圆角、frame
     self.frame = [UIScreen mainScreen].bounds;
     self.clipsToBounds = YES;
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorEndAlpha];
     
     //设置三角形的frame
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width; //屏幕宽度
-    self.triangleView.frame = CGRectMake(screenWidth - self.triangleRightMargin - self.triangleSize.width, self.realTriangleY, self.triangleSize.width, self.triangleSize.height);
+    
+    
+    CGFloat horizonWidth = screenSize.width; //水平的宽度(竖屏)
+    
+    self.triangleView.frame = CGRectMake(horizonWidth - self.triangleRightMargin - self.triangleSize.width, self.realTriangleY, self.triangleSize.width, self.triangleSize.height);
     self.triangleView.triangleColor = self.triangleColor;
     
-    self.tableView.frame = CGRectMake(screenWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
+    self.tableView.frame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
     
     [self.tableView reloadData];
 }
@@ -394,8 +431,8 @@ static NSString *const CellID = @"CellID";
     }
 }
 
-- (void)setMenuScaleType:(FFDropDownMenuViewScaleType)menuScaleType {//15
-    _menuScaleType = menuScaleType;
+- (void)setMenuAnimateType:(FFDropDownMenuViewAnimateType)menuAnimateType { //15
+    _menuAnimateType = menuAnimateType;
 }
 
 

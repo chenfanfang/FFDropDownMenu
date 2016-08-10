@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 //model
+#import "FFDropDownMenuBasedModel.h"
 #import "FFDropDownMenuModel.h"
+
+//cell
+#import "FFDropDownMenuBasedCell.h"
+#import "FFDropDownMenuCell.h"
 
 
 //宏
@@ -19,7 +24,7 @@
 #define FFDefaultSize CGSizeMake(20, 10)
 #define FFDefaultCell @"FFDropDownMenuCell"
 #define FFDefaultColor [UIColor whiteColor]
-#define FFDefaultMenuScaleType FFDropDownMenuViewScaleType_TopRight
+#define FFDefaultMenuScaleType FFDropDownMenuViewAnimateType_ScaleBasedTopRight
 
 //rgb颜色 r-red 、  g-green  、  b-blue  、 a-alpha
 #define FFColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
@@ -27,19 +32,19 @@
 /**
  *  菜单的伸缩类型
  */
-typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
+typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
     /**
      *  以右上角为基点进行伸缩
      */
-    FFDropDownMenuViewScaleType_TopRight = 0, //default
+    FFDropDownMenuViewAnimateType_ScaleBasedTopRight = 0, //default
     /**
      *  以左上角为基点进行伸缩
      */
-    FFDropDownMenuViewScaleType_TopLeft,
+    FFDropDownMenuViewAnimateType_ScaleBasedTopLeft,
     /**
      *  以中点为基点进行伸缩
      */
-    FFDropDownMenuViewScaleType_Middle
+    FFDropDownMenuViewAnimateType_ScaleBasedMiddle
 };
 
 /**
@@ -50,10 +55,10 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
 
 
 
-///------------------------
+///=========================
 ///    创建下拉菜单方式1
 /// 适用于使用默认的下拉菜单样式
-///------------------------
+///=========================
 
 /**
  *  快速实例化一个默认样式的下拉菜单
@@ -69,12 +74,12 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
  *  @return 实例化的一个下拉菜单对象
 */
 
-+ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray<FFDropDownMenuModel *> *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin;
++ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin;
 
 
 
 
-///------------------------------------------------------------------
+///==================================================================
 ///          创建下拉菜单方式2
 ///   适用于自定义下拉菜单样式，单个属性进行赋值
 ///   >>步骤:
@@ -83,7 +88,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
 ///       >>>>>若要使用默认值，可以不对属性进行赋值，或者赋值 FFDefault....
 ///
 ///   3、 调用 setup方法
-///------------------------------------------------------------------
+///==================================================================
 
 
 
@@ -135,8 +140,8 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewScaleType) {
 /** 14、动画效果时间(若不设置，默认为0.2) */
 @property (nonatomic, assign) CGFloat animateDuration;
 
-/** 15、菜单的伸缩类型 */
-@property (nonatomic, assign) FFDropDownMenuViewScaleType menuScaleType;
+/** 15、菜单的弹出的动画效果 */
+@property (nonatomic, assign) FFDropDownMenuViewAnimateType menuAnimateType;
 
 
 

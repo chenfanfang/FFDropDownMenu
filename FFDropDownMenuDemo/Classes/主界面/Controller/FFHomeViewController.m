@@ -147,7 +147,7 @@
     UIImageView *homeImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     homeImageView.contentMode = UIViewContentModeScaleAspectFill;
     homeImageView.image = [UIImage imageNamed:@"background"];
-    [self.view addSubview:homeImageView];
+    //[self.view addSubview:homeImageView];
     
 }
 
