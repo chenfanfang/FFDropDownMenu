@@ -29,12 +29,22 @@
 /** cell是否是正确格式的cell */
 @property (nonatomic, assign) BOOL isCellCorrect;
 
+/** tableView的frame */
+@property (nonatomic, assign) CGRect menuViewFrame;
+
+/** 菜单view的容器 */
+@property (nonatomic, strong) UIView *menuContentView;
+
 @end
 
 @implementation FFDropDownMenuView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.menuContentView = [[UIView alloc] init];
+        self.menuContentView.backgroundColor = [UIColor clearColor];
+        self.menuContentView.clipsToBounds = YES;
+        [self addSubview:self.menuContentView];
         
         //默认属性的赋值
         self.cellClassName = @"FFDropDownMenuCell";
@@ -47,7 +57,7 @@
         self.triangleY = 64;
         self.realTriangleY = self.triangleY;
         self.triangleRightMargin = 20;
-        self.triangleSize = CGSizeMake(20, 10);
+        self.triangleSize = FFDefaultSize;
         self.bgColorbeginAlpha = 0.02;
         self.bgColorEndAlpha = 0.2;
         self.animateDuration = 0.2;
@@ -84,7 +94,7 @@
     //正常的状态栏高度是20
     CGFloat normalStatusBarHeight = 20;
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    NSLog(@"%@",NSStringFromCGRect(statusBarFrame));
+    //NSLog(@"%@",NSStringFromCGRect(statusBarFrame));
     
     
     CGFloat screenWidth = 0;
@@ -102,7 +112,8 @@
     
     //横屏
     if (statusBarFrame.origin.y >= screenWidth || //横屏: statusBarFrame = {{0, 375}, {0, 0}}
-        statusBarFrame.size.width >= screenHeight ) {//横屏: statusBarFrame = {{0, 0}, {667, 20}}
+        statusBarFrame.size.width >= screenHeight || //横屏: statusBarFrame = {{0, 0}, {667, 20}}
+        statusBarFrame.origin.x >= screenHeight) { //横屏:{{568, 0}, {0, 0}}
         self.realTriangleY = self.triangleY - (44 - 32) - normalStatusBarHeight; //竖屏导航栏44， 横屏:32
         
     } else { //竖屏
@@ -144,14 +155,16 @@ static NSString *const CellID = @"CellID";
     if (_tableView == nil) {
         UITableView *tableView = [[UITableView alloc] init];
         tableView.backgroundColor = [UIColor clearColor];
-        [self addSubview:tableView];
+        [self.menuContentView addSubview:tableView];
         _tableView = tableView;
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.scrollEnabled = NO;
         tableView.clipsToBounds = YES;
+        tableView.layer.masksToBounds = YES;
+        self.menuContentView.layer.cornerRadius = self.menuCornerRadius;
         tableView.layer.cornerRadius = self.menuCornerRadius;
-        //锚点设置成右上角，进行frame的设置需要注意
+        //锚点的设置
         switch (self.menuAnimateType) {
             case FFDropDownMenuViewAnimateType_ScaleBasedTopRight: //右上角
                 tableView.layer.anchorPoint = CGPointMake(1, 0);
@@ -160,6 +173,11 @@ static NSString *const CellID = @"CellID";
                 tableView.layer.anchorPoint = CGPointMake(0, 0);
                 break;
             case FFDropDownMenuViewAnimateType_ScaleBasedMiddle: //中间
+                break;
+            case FFDropDownMenuViewAnimateType_FadeInFadeOut: //淡入淡出效果
+                break;
+            case FFDropDownMenuViewAnimateType_RollerShutter: //卷帘效果
+                tableView.layer.anchorPoint = CGPointMake(0.5, 1);
                 break;
                 
             default:
@@ -232,15 +250,15 @@ static NSString *const CellID = @"CellID";
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorEndAlpha];
     
     //设置三角形的frame
-    
-    
-    CGFloat horizonWidth = screenSize.width; //水平的宽度(竖屏)
+    CGFloat horizonWidth = screenSize.width; //水平的宽度
     
     self.triangleView.frame = CGRectMake(horizonWidth - self.triangleRightMargin - self.triangleSize.width, self.realTriangleY, self.triangleSize.width, self.triangleSize.height);
     self.triangleView.triangleColor = self.triangleColor;
     
-    self.tableView.frame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
-    
+    //tableView的frame
+    self.menuViewFrame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
+    self.menuContentView.frame = self.menuViewFrame;
+    self.tableView.frame = self.menuContentView.bounds;
     [self.tableView reloadData];
 }
 
@@ -301,55 +319,210 @@ static NSString *const CellID = @"CellID";
  *  如果死点击view的其他区域，没有执行block代码，则需要一个动画效果
  */
 - (void)dismissMenuWithAnimation:(BOOL)animation {
+    if (self.isShow == NO) return;
+    
     self.isShow = NO;
     
+    //==========================================================================
+    //                             需要动画效果
+    //==========================================================================
     if (animation == YES) {
         
         __weak typeof(self) weakSelf = self;
-        //动画效果:在0.2秒内 大小缩小到 0.1倍 ，背景颜色由深变浅(其实颜色都是黑色，只是通过alpha来控制颜色的深浅)
-        [UIView animateWithDuration:self.animateDuration animations:^{
-            [weakSelf.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
-            weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:weakSelf.bgColorbeginAlpha];
-            weakSelf.tableView.alpha = 0;
-            weakSelf.triangleView.alpha = 0;
+        
+        //=============
+        //淡入淡出动画效果
+        //=============
+        
+        if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FadeInFadeOut) {
+            [UIView animateWithDuration:self.animateDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorbeginAlpha];
+                weakSelf.tableView.alpha = 0;
+                weakSelf.triangleView.alpha = 0;
+            } completion:^(BOOL finished) {
+                [weakSelf removeFromSuperview];
+            }];
+        }
+        
+        //=====================
+        //卷帘效果
+        //=====================
+        
+        else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
+            [UIView animateWithDuration:self.animateDuration animations:^{
+                CGRect frame = weakSelf.menuContentView.bounds;
+                frame.size.height = 0;
+                weakSelf.tableView.frame = frame;
+                weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorbeginAlpha);
+            } completion:^(BOOL finished) {
+                [weakSelf removeFromSuperview];
+            }];
             
-        } completion:^(BOOL finished) {
-            //动画结束:将控制器的view从父控件中移除(父控件就是 KeyWindow)
-            [weakSelf removeFromSuperview];
-        }];
+        }
+        
+        
+        //=====================
+        //从上往下落下
+        //=====================
+        
+        else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FallFromTop) {
+            
+            
+            [UIView animateWithDuration:self.animateDuration animations:^{
+                CGRect tableViewLayerFrame = self.menuContentView.bounds;
+                tableViewLayerFrame.origin.y = -tableViewLayerFrame.size.height;
+                self.tableView.layer.frame = tableViewLayerFrame;
+            } completion:^(BOOL finished) {
+                [self removeFromSuperview];
+            }];
+        }
+        
+        //=============
+        //伸缩动画效果
+        //=============
+        else {
+            //动画效果:在0.2秒内 大小缩小到 0.1倍 ，背景颜色由深变浅(其实颜色都是黑色，只是通过alpha来控制颜色的深浅)
+            [UIView animateWithDuration:self.animateDuration animations:^{
+                [weakSelf.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
+                weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:weakSelf.bgColorbeginAlpha];
+                weakSelf.tableView.alpha = 0;
+                weakSelf.triangleView.alpha = 0;
+                
+            } completion:^(BOOL finished) {
+                //动画结束:将控制器的view从父控件中移除(父控件就是 KeyWindow)
+                [weakSelf removeFromSuperview];
+            }];
+        }
+        
         
     }
     
+    //========================================================================
+    //                            不需要动画效果
+    //========================================================================
+    
+    
     else {
-        [self.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorbeginAlpha];
-        [self removeFromSuperview];
+        //=============
+        //淡入淡出动画效果
+        //=============
+        
+        if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FadeInFadeOut) {
+            self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorbeginAlpha];
+            [self removeFromSuperview];
+        }
+        
+        //=====================
+        //卷帘效果
+        //=====================
+        
+        else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
+            [self removeFromSuperview];
+        }
+
+        
+        //=====================
+        //从上往下落下
+        //=====================
+        
+        else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FallFromTop) {
+            CGRect tableViewLayerFrame = self.menuContentView.bounds;
+            tableViewLayerFrame.origin.y = -tableViewLayerFrame.size.height;
+            self.tableView.layer.frame = tableViewLayerFrame;
+            [self removeFromSuperview];
+        }
+        
+        //=============
+        //伸缩动画效果
+        //=============
+        else {
+            [self.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
+            self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorbeginAlpha];
+            [self removeFromSuperview];
+        }
+        
     }
 }
 
 
 /** 显示菜单 */
 - (void)showMenu {
+    
     self.isShow = YES;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     
-    //先将menu的tableView缩小
-    [self.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
     //将背景颜色设置浅的背景颜色
-    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorbeginAlpha];
-    
-    self.tableView.alpha = 0;
-    self.triangleView.alpha = 0;
-    
+    self.backgroundColor = FFColor(0, 0, 0, self.bgColorbeginAlpha);
     __weak typeof(self) weakSelf = self;
-    //执行动画：背景颜色 由浅到深,menu的tableView由小到大，回复到正常大小
-    [UIView animateWithDuration:self.animateDuration animations:^{
-        weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorEndAlpha];
-        [weakSelf.tableView.layer setValue:@(1) forKeyPath:@"transform.scale"];
-        weakSelf.tableView.alpha = 1;
-        weakSelf.triangleView.alpha = 1;
-    }];
+    
+    
+    
+    //================
+    //淡入淡出效果
+    //================
+    
+    if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FadeInFadeOut) {
+        self.tableView.alpha = 0;
+        self.triangleView.alpha = 0;
+        
+        [UIView animateWithDuration:self.animateDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            weakSelf.backgroundColor = FFColor(0, 0, 0, self.bgColorEndAlpha);
+            weakSelf.tableView.alpha = 1;
+            weakSelf.triangleView.alpha = 1;
+        } completion:nil];
+    }
+    
+    //===============
+    //卷帘效果
+    //===============
+    
+    else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
+        self.backgroundColor = FFColor(0, 0, 0, self.bgColorbeginAlpha);
+        CGRect frame = self.menuContentView.bounds;
+        frame.size.height = 0;
+        self.tableView.frame = frame;
+        [UIView animateWithDuration:self.animateDuration animations:^{
+            weakSelf.tableView.frame = weakSelf.menuContentView.bounds;
+            weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorEndAlpha);
+        }];
+    }
+    
+    //===============
+    //从上往下落下
+    //===============
+    
+    else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FallFromTop) {
+        CGRect tableViewLayerFrame = self.menuContentView.bounds;
+        tableViewLayerFrame.origin.y = -tableViewLayerFrame.size.height;
+        self.tableView.layer.frame = tableViewLayerFrame;
+
+        [UIView animateWithDuration:self.animateDuration animations:^{
+            weakSelf.tableView.layer.frame = weakSelf.menuContentView.bounds;
+            weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorEndAlpha);
+        } completion:nil];
+
+    }
+    
+    
+    
+    //================
+    //伸缩效果
+    //================
+    
+    else {
+        self.tableView.alpha = 0;
+        self.triangleView.alpha = 0;
+        //先将menu的tableView缩小
+        [self.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
+        //执行动画：背景颜色 由浅到深,menu的tableView由小到大，回复到正常大小
+        [UIView animateWithDuration:self.animateDuration animations:^{
+            weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorEndAlpha];
+            [weakSelf.tableView.layer setValue:@(1) forKeyPath:@"transform.scale"];
+            weakSelf.tableView.alpha = 1;
+            weakSelf.triangleView.alpha = 1;
+        }];
+    }
 }
 
 

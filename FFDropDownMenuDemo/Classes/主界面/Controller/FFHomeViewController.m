@@ -142,12 +142,6 @@
     UIBarButtonItem *headerIconItem = [[UIBarButtonItem alloc] initWithCustomView:headerImageView];
     self.navigationItem.leftBarButtonItem = headerIconItem;
     
-    //手机QQ首页的图片
-    self.view.backgroundColor = [UIColor whiteColor];
-    UIImageView *homeImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    homeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    homeImageView.image = [UIImage imageNamed:@"background"];
-    //[self.view addSubview:homeImageView];
     
 }
 
