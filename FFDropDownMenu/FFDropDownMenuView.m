@@ -11,6 +11,9 @@
 //view
 #import "FFDropDownMenuTriangleView.h"
 
+//other
+#import "FFDropDownMenu.h"
+
 
 @interface FFDropDownMenuView ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -94,7 +97,7 @@
     //正常的状态栏高度是20
     CGFloat normalStatusBarHeight = 20;
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    //NSLog(@"%@",NSStringFromCGRect(statusBarFrame));
+    //FFLog(@"%@",NSStringFromCGRect(statusBarFrame));
     
     
     CGFloat screenWidth = 0;
@@ -189,12 +192,12 @@ static NSString *const CellID = @"CellID";
         if ([self.cellClassName hasSuffix:@".xib"]) { //xib名称
             NSString *className = [self.cellClassName componentsSeparatedByString:@".xib"].firstObject;
             if (!NSClassFromString(className)) {
-                NSLog(@"%@这个类不存在,请查看项目中是否有该类",className);
+                FFLog(@"%@这个类不存在,请查看项目中是否有该类",className);
                 return _tableView;
             }
             
             if (![NSClassFromString(className) isSubclassOfClass:[FFDropDownMenuBasedCell class]]) {
-                NSLog(@"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类",className);
+                FFLog(@"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类",className);
                 return _tableView;
             }
             
@@ -204,12 +207,12 @@ static NSString *const CellID = @"CellID";
             
         } else { //cell类名
             if (!NSClassFromString(self.cellClassName)) {
-                NSLog(@"%@这个类不存在,请查看项目中是否有该类",self.cellClassName);
+                FFLog(@"%@这个类不存在,请查看项目中是否有该类",self.cellClassName);
                 return _tableView;
             }
             
             if (![NSClassFromString(self.cellClassName) isSubclassOfClass:[FFDropDownMenuBasedCell class]]) {
-                NSLog(@"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类",self.cellClassName);
+                FFLog(@"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类",self.cellClassName);
                 return _tableView;
             }
             
@@ -344,9 +347,9 @@ static NSString *const CellID = @"CellID";
             }];
         }
         
-        //=====================
-        //卷帘效果
-        //=====================
+        //============
+        //   卷帘效果
+        //============
         
         else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
             [UIView animateWithDuration:self.animateDuration animations:^{
@@ -361,9 +364,9 @@ static NSString *const CellID = @"CellID";
         }
         
         
-        //=====================
-        //从上往下落下
-        //=====================
+        //============
+        // 从上往下落下
+        //============
         
         else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FallFromTop) {
             
@@ -412,18 +415,18 @@ static NSString *const CellID = @"CellID";
             [self removeFromSuperview];
         }
         
-        //=====================
-        //卷帘效果
-        //=====================
+        //=============
+        //   卷帘效果
+        //=============
         
         else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
             [self removeFromSuperview];
         }
 
         
-        //=====================
-        //从上往下落下
-        //=====================
+        //=============
+        //  从上往下落下
+        //=============
         
         else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FallFromTop) {
             CGRect tableViewLayerFrame = self.menuContentView.bounds;
@@ -433,7 +436,7 @@ static NSString *const CellID = @"CellID";
         }
         
         //=============
-        //伸缩动画效果
+        //  伸缩动画效果
         //=============
         else {
             [self.tableView.layer setValue:@(0.1) forKeyPath:@"transform.scale"];
@@ -458,9 +461,9 @@ static NSString *const CellID = @"CellID";
     
     
     
-    //================
-    //淡入淡出效果
-    //================
+    //=============
+    //  淡入淡出效果
+    //=============
     
     if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FadeInFadeOut) {
         self.tableView.alpha = 0;
@@ -473,9 +476,9 @@ static NSString *const CellID = @"CellID";
         } completion:nil];
     }
     
-    //===============
-    //卷帘效果
-    //===============
+    //=============
+    //   卷帘效果
+    //=============
     
     else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
         self.backgroundColor = FFColor(0, 0, 0, self.bgColorbeginAlpha);
@@ -488,9 +491,9 @@ static NSString *const CellID = @"CellID";
         }];
     }
     
-    //===============
-    //从上往下落下
-    //===============
+    //============
+    //  上往下落下
+    //============
     
     else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_FallFromTop) {
         CGRect tableViewLayerFrame = self.menuContentView.bounds;
@@ -506,9 +509,9 @@ static NSString *const CellID = @"CellID";
     
     
     
-    //================
-    //伸缩效果
-    //================
+    //============
+    //  伸缩效果
+    //============
     
     else {
         self.tableView.alpha = 0;

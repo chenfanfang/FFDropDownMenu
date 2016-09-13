@@ -11,6 +11,9 @@
 //model
 #import "FFDropDownMenuModel.h"
 
+//other
+#import "FFDropDownMenu.h"
+
 @interface FFDropDownMenuCell ()
 
 /** 图片 */
@@ -71,8 +74,15 @@
     
     FFDropDownMenuModel *realMenuModel = (FFDropDownMenuModel *)menuModel;
     self.customTitleLabel.text = realMenuModel.menuItemTitle;
+    
     //给imageView赋值
-    self.customImageView.image = [UIImage imageNamed:realMenuModel.menuItemIconName];
+    if (realMenuModel.menuItemIconName.length) {
+        self.customImageView.image = [UIImage imageNamed:realMenuModel.menuItemIconName];
+        
+    } else {
+        FFLog(@"您传入的图片为空图片,框架内部默认不做任何处理。若您的确不想传入图片，则请忽略此处打印");
+    }
+    
 }
 
 @end

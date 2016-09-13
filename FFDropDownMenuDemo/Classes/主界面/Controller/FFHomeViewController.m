@@ -32,7 +32,7 @@
     /** 初始化下拉菜单 */
     [self setupDropDownMenu];
     
-    /** 进行基本的设置、搭建出手机QQ首页效果、读者可忽略setupBasedView 中的代码 */
+    /** 进行基本的设置、读者可忽略setupBasedView 中的代码 */
     [self setupBasedView];
 }
 
