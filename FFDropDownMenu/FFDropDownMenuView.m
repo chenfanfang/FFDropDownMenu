@@ -20,7 +20,6 @@
 /**tableView*/
 @property (nonatomic, weak)  UITableView *tableView;
 
-/** 三角形 */
 @property (nonatomic, strong) FFDropDownMenuTriangleView *triangleView;
 
 /** 真实的三角形的Y(这个属性是用于状态栏的改变) */
@@ -42,6 +41,12 @@
 
 @implementation FFDropDownMenuView
 
+
+//=================================================================
+//                        生命周期<life circle>
+//=================================================================
+#pragma mark - 生命周期<life circle>
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.menuContentView = [[UIView alloc] init];
@@ -49,7 +54,7 @@
         self.menuContentView.clipsToBounds = YES;
         [self addSubview:self.menuContentView];
         
-        //默认属性的赋值
+        //默认属性的赋值<assign>
         self.cellClassName = @"FFDropDownMenuCell";
         self.menuWidth = 150;
         self.menuCornerRadius = 5;
@@ -69,10 +74,10 @@
         self.isCellCorrect = NO;
         self.isShow = NO;
         
-        //监听状态栏高度改变的通知
+        //监听状态栏高度改变的通知<observe statusbar height change notification>
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarHeightChanged:) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
         
-        //监听状态栏的旋转
+        //监听状态栏的旋转<observe statusbar orientation change notification>
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
         
@@ -85,6 +90,61 @@
 }
 
 
+//=================================================================
+//                  快速实例化一个菜单对象<farst instance>
+//=================================================================
+#pragma mark - 快速实例化一个菜单对象<farst instance>
+
++ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin {
+    
+    FFDropDownMenuView *menuView = [FFDropDownMenuView new];
+    
+    menuView.menuModelsArray = menuModelsArray;
+    menuView.menuWidth = menuWidth;
+    menuView.eachMenuItemHeight = eachItemHeight;
+    menuView.menuRightMargin = menuRightMargin;
+    menuView.triangleRightMargin = triangleRightMargin;
+    
+    [menuView setup];
+    return menuView;
+}
+
+
+//=================================================================
+//                         初始化<setup>
+//=================================================================
+#pragma mark - 初始化<setup>
+
+- (void)setup {
+    [_tableView removeFromSuperview];
+    _tableView = nil;
+    
+    //屏幕的size  <screen size>
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    
+    //设置view的圆角、frame  <set view's cornerRadius and frame>
+    self.frame = [UIScreen mainScreen].bounds;
+    self.clipsToBounds = YES;
+    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorEndAlpha];
+    
+    //设置三角形的frame <set triangle frame>
+    CGFloat horizonWidth = screenSize.width; //水平的宽度
+    
+    self.triangleView.frame = CGRectMake(horizonWidth - self.triangleRightMargin - self.triangleSize.width, self.realTriangleY, self.triangleSize.width, self.triangleSize.height);
+    self.triangleView.triangleColor = self.triangleColor;
+    
+    //tableView的frame <set tableView frame>
+    self.menuViewFrame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
+    self.menuContentView.frame = self.menuViewFrame;
+    self.tableView.frame = self.menuContentView.bounds;
+    [self.tableView reloadData];
+}
+
+
+//=================================================================
+//                    横竖屏适配<Screen adaptation>
+//=================================================================
+#pragma mark - 横竖屏适配<Screen adaptation>
 /** 横竖屏的改变 */
 - (void)statusBarOrientationChange:(NSNotification *)note {
     [self setup];
@@ -133,24 +193,12 @@
 }
 
 
-+ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin {
-    
-    FFDropDownMenuView *menuView = [FFDropDownMenuView new];
-    
-    menuView.menuModelsArray = menuModelsArray;
-    menuView.menuWidth = menuWidth;
-    menuView.eachMenuItemHeight = eachItemHeight;
-    menuView.menuRightMargin = menuRightMargin;
-    menuView.triangleRightMargin = triangleRightMargin;
-    
-    [menuView setup];
-    return menuView;
-}
 
 
-
-/***********************************懒加载***********************************/
-#pragma mark - 懒加载
+//=================================================================
+//                         懒加载<lazy load>
+//=================================================================
+#pragma mark - 懒加载<lazy load>
 
 static NSString *const CellID = @"CellID";
 
@@ -167,7 +215,7 @@ static NSString *const CellID = @"CellID";
         tableView.layer.masksToBounds = YES;
         self.menuContentView.layer.cornerRadius = self.menuCornerRadius;
         tableView.layer.cornerRadius = self.menuCornerRadius;
-        //锚点的设置
+        //锚点的设置 <set anchorPoint>
         switch (self.menuAnimateType) {
             case FFDropDownMenuViewAnimateType_ScaleBasedTopRight: //右上角
                 tableView.layer.anchorPoint = CGPointMake(1, 0);
@@ -182,13 +230,15 @@ static NSString *const CellID = @"CellID";
             case FFDropDownMenuViewAnimateType_RollerShutter: //卷帘效果
                 tableView.layer.anchorPoint = CGPointMake(0.5, 1);
                 break;
+            case FFDropDownMenuViewAnimateType_FallFromTop:
+            break;
                 
             default:
                 break;
         }
         
         
-        //注册cell
+        //注册cell <register cell>
         if ([self.cellClassName hasSuffix:@".xib"]) { //xib名称
             NSString *className = [self.cellClassName componentsSeparatedByString:@".xib"].firstObject;
             if (!NSClassFromString(className)) {
@@ -237,37 +287,13 @@ static NSString *const CellID = @"CellID";
 
 
 
-/***********************************初始化***********************************/
-#pragma mark - 初始化
-
-- (void)setup {
-    [_tableView removeFromSuperview];
-    _tableView = nil;
-    
-    //屏幕的size
-    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    
-    //设置view的圆角、frame
-    self.frame = [UIScreen mainScreen].bounds;
-    self.clipsToBounds = YES;
-    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorEndAlpha];
-    
-    //设置三角形的frame
-    CGFloat horizonWidth = screenSize.width; //水平的宽度
-    
-    self.triangleView.frame = CGRectMake(horizonWidth - self.triangleRightMargin - self.triangleSize.width, self.realTriangleY, self.triangleSize.width, self.triangleSize.height);
-    self.triangleView.triangleColor = self.triangleColor;
-    
-    //tableView的frame
-    self.menuViewFrame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
-    self.menuContentView.frame = self.menuViewFrame;
-    self.tableView.frame = self.menuContentView.bounds;
-    [self.tableView reloadData];
-}
 
 
-/***********************************UITableViewDataSource*********************/
+//=================================================================
+//                       UITableViewDataSource
+//=================================================================
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.menuModelsArray.count;
 }
@@ -287,8 +313,13 @@ static NSString *const CellID = @"CellID";
     return cell;
 }
 
-/*****************************UITableViewDelegate*****************************/
+
+
+//=================================================================
+//                       UITableViewDelegate
+//=================================================================
 #pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.isShow == YES) {
         FFDropDownMenuBasedModel *menuModel = self.menuModelsArray[indexPath.row];
@@ -304,8 +335,11 @@ static NSString *const CellID = @"CellID";
     return self.eachMenuItemHeight;
 }
 
-/***********************************事件处理***********************************/
-#pragma mark - 事件处理
+
+//=================================================================
+//                         事件处理<action>
+//=================================================================
+#pragma mark - 事件处理<action>
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     /** 点击view退出菜单 */
@@ -326,9 +360,9 @@ static NSString *const CellID = @"CellID";
     
     self.isShow = NO;
     
-    //==========================================================================
-    //                             需要动画效果
-    //==========================================================================
+    //================================
+    //          需要动画效果
+    //================================
     if (animation == YES) {
         
         __weak typeof(self) weakSelf = self;
@@ -342,6 +376,8 @@ static NSString *const CellID = @"CellID";
                 weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:self.bgColorbeginAlpha];
                 weakSelf.tableView.alpha = 0;
                 weakSelf.triangleView.alpha = 0;
+                
+                
             } completion:^(BOOL finished) {
                 [weakSelf removeFromSuperview];
             }];
@@ -374,7 +410,8 @@ static NSString *const CellID = @"CellID";
             [UIView animateWithDuration:self.animateDuration animations:^{
                 CGRect tableViewLayerFrame = self.menuContentView.bounds;
                 tableViewLayerFrame.origin.y = -tableViewLayerFrame.size.height;
-                self.tableView.layer.frame = tableViewLayerFrame;
+                weakSelf.tableView.layer.frame = tableViewLayerFrame;
+                weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorbeginAlpha);
             } completion:^(BOOL finished) {
                 [self removeFromSuperview];
             }];
@@ -400,9 +437,9 @@ static NSString *const CellID = @"CellID";
         
     }
     
-    //========================================================================
-    //                            不需要动画效果
-    //========================================================================
+    //================================
+    //          不需要动画效果
+    //================================
     
     
     else {
@@ -529,8 +566,10 @@ static NSString *const CellID = @"CellID";
 }
 
 
-/******************************所有属性的set方法***********************************/
-#pragma mark - set方法
+//=================================================================
+//                   所有属性的set方法<set method>
+//=================================================================
+#pragma mark - 所有属性的set方法<set method>
 
 - (void)setMenuModelsArray:(NSArray *)menuModelsArray {//1
     _menuModelsArray = menuModelsArray;
@@ -576,6 +615,7 @@ static NSString *const CellID = @"CellID";
 - (void)setTriangleY:(CGFloat)triangleY {//9
     if (triangleY != FFDefaultFloat) {
         _triangleY = triangleY;
+        self.realTriangleY = _triangleY;
     }
 }
 
