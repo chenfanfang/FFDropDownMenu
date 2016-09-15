@@ -6,8 +6,15 @@ FFDropDownMenu
 ---
 ---
 
+####默认样式 (Default menu style)
+![default menu style](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/a5cc6c53c7cddeaaad92cff1528708646c797a91/FFDropDownMenuDemo/Resources/%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%88%E6%9E%9C%E5%9B%BE/basicUsage2.gif)
+
+####自定义菜单样式 (Custom menu style)
+
+![custom  menu style](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/d94a201d7125d757a5c058855fc5d1521d6528a3/FFDropDownMenuDemo/Resources/%E5%AE%9E%E6%88%98_%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F/customMenuStyle.gif)
 
 
+###你可以自定义你想要的菜单样式 (you can suctom the menu style that you want)
 
 
 - [更多的使用方法demo  (more usage demo address)](https://github.com/chenfanfang/CollectionsOfExample)
@@ -17,11 +24,14 @@ FFDropDownMenu
 
 ---
 ---
+
+
+
 FFDropDownMenu的基本使用(based usage)
 ---
 
 
-先浏览下效果图：
+####先浏览下效果图(Browsing the effect picture first)
 
 
 ![仿手机QQ下拉菜单.gif](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/a5cc6c53c7cddeaaad92cff1528708646c797a91/FFDropDownMenuDemo/Resources/%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%88%E6%9E%9C%E5%9B%BE/basicUsage2.gif)
@@ -211,11 +221,11 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 ---
 ---
 
-若觉得框架自带的菜单样式不是自己喜欢的，或者需要给菜单选项添加更多的子控件，可以通过自定义菜单选项来实现，具体使用方式，点击下面两个链接查看即可。
+若觉得框架自带的菜单样式不是自己喜欢的，或者需要给菜单选项添加更多的子控件，可以通过自定义菜单选项来实现，具体使用方式，点击下面两个链接查看即可。(If you don't like the default menu style ,or need add more view in menu item, you can custom the menu style.The links below will guide you to custom menu style.)
 ===
 
-###【自定义菜单选项 -- xib方式】
--  http://www.jianshu.com/p/6a42a35ae2db
+###[自定义菜单选项 -- xib方式(custom menu style by xib)](http://www.jianshu.com/p/6a42a35ae2db)
+-  
 
 ![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/35d221a5f6ecd4a0956bd4d7652f91495beee5ea/FFDropDownMenuDemo/Resources/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F(xib)/customMenuStyleXib.png)
 
@@ -224,8 +234,8 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 
 ---
 ---
-###【自定义菜单选项 -- 非xib方式】
-- http://www.jianshu.com/p/eead6fe4d59f
+###[自定义菜单选项 -- 非xib方式(suctom menu style by code)](http://www.jianshu.com/p/eead6fe4d59f)
+- 
 
 ![仿手机QQ下拉菜单.png](https://raw.githubusercontent.com/chenfanfang/FFDropDownMenu/35d221a5f6ecd4a0956bd4d7652f91495beee5ea/FFDropDownMenuDemo/Resources/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F(%E9%9D%9Exib)/customMenuStyle.png)
 
@@ -238,5 +248,5 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 * 如果在使用过程中发现功能不够用，希望你能在 简书私信我，或者在我简书专题的博客进行评论。我非常想为这个框架增加更多好用的功能，谢谢
 * 如果你想和我一起完善FFDropDownMenu，请Pull Requests我
 
-##我
-http://www.jianshu.com/users/80fadb71940d/latest_articles
+##[About me](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+
