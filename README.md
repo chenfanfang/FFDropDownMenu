@@ -1,18 +1,26 @@
 FFDropDownMenu
 ===
-- 一款类似手机QQ下拉菜单框架。
-- 自由度高，可以自定义菜单的样式
+- 下拉菜单框架 (drop-down menu framework)
+- 自由度高，可以自定义菜单的样式 (High degree of freedom, you can custom the menu style that you want）
 
 ---
 ---
 
-- 更多的使用方法的demo地址:https://github.com/chenfanfang/CollectionsOfExample
 
-- 更多的使用方法的博客地址:http://www.jianshu.com/notebooks/5552428/latest
+
+
+
+- [更多的使用方法demo  (more usage demo address)](https://github.com/chenfanfang/CollectionsOfExample)
+
+- [更多的使用方法的博客地址 (more usage blog address)](http://www.jianshu.com/notebooks/5552428/latest)
 
 
 ---
 ---
+FFDropDownMenu的基本使用(based usage)
+---
+
+
 先浏览下效果图：
 
 
@@ -37,6 +45,7 @@ pod  FFDropDownMenu
 - FFDropDownMenu文件夹里面的文件有
 
 ```objc
+FFDropDownMenu.h
 FFDropDownMenuBasedCell.h        FFDropDownMenuBasedCell.m
 FFDropDownMenuBasedModel.h       FFDropDownMenuBasedModel.m
 FFDropDownMenuCell.h             FFDropDownMenuCell.m

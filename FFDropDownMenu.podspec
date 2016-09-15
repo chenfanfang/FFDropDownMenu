@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 s.name         = "FFDropDownMenu"
 s.platform = :ios, "7.0"
-s.version      = "1.3.1"
+s.version      = "1.3.5"
 s.ios.deployment_target = '7.0'
 s.summary      = "A kind of dropdown menu"
 s.homepage     = "https://github.com/chenfanfang/FFDropDownMenu"
