@@ -48,7 +48,7 @@
     self.dropdownMenu.delegate = self;
     
     self.dropdownMenu.ifShouldScroll = YES;
-    self.dropdownMenu.menuItemBackgroundColor = FFColor(1, 1, 1, 0.5);
+    
     [self.dropdownMenu setup];
 }
 

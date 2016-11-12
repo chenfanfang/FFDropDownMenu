@@ -243,6 +243,31 @@ FFDropDownMenuView.h             FFDropDownMenuView.m
 ---
 ---
 
+版本更新
+===
+###2016-11-13
+- 增加了几个代理方法
+
+```objc
+/** 若是自定义cell样式的，可以在这个代理方法中稍微小修改cell的样式，比如是否需要下划线之类的 */
+
+- (void)ffDropDownMenuView:(FFDropDownMenuView *)menuView WillAppearMenuCell:(FFDropDownMenuBasedCell *)menuCell index:(NSInteger)index;
+
+- (void)ffDropDownMenuViewWillAppear;
+
+- (void)ffDropDownMenuViewWDidAppear;
+
+- (void)ffDropDownMenuViewWillDisappear;
+
+- (void)ffDropDownMenuViewWDidDisappear;
+```
+
+
+---
+---
+
+
+
 ## 期待
 * 如果在使用过程中遇到BUG，希望你能在 简书私信我，或者在我简书专题的博客进行评论。谢谢（或者尝试下载最新的框架代码看看BUG修复没有）
 * 如果在使用过程中发现功能不够用，希望你能在 简书私信我，或者在我简书专题的博客进行评论。我非常想为这个框架增加更多好用的功能，谢谢
