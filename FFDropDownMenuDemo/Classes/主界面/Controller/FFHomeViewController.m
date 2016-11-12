@@ -44,6 +44,7 @@
     
     self.dropdownMenu = [FFDropDownMenuView ff_DefaultStyleDropDownMenuWithMenuModelsArray:modelsArray menuWidth:FFDefaultFloat eachItemHeight:FFDefaultFloat menuRightMargin:FFDefaultFloat triangleRightMargin:FFDefaultFloat];
     
+    //如果有需要，可以设置代理（非必须）
     self.dropdownMenu.delegate = self;
     
     self.dropdownMenu.ifShouldScroll = YES;
