@@ -13,4 +13,7 @@
  */
 @interface FFDropDownMenuCell : FFDropDownMenuBasedCell
 
+/** 底部分割线 */
+@property (nonatomic, weak) UIView *separaterView;
+
 @end

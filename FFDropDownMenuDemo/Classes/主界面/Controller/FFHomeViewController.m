@@ -17,7 +17,7 @@
 
 
 
-@interface FFHomeViewController ()
+@interface FFHomeViewController ()<FFDropDownMenuViewDelegate>
 
 /** 下拉菜单 */
 @property (nonatomic, strong) FFDropDownMenuView *dropdownMenu;
@@ -43,6 +43,12 @@
     NSArray *modelsArray = [self getMenuModelsArray];
     
     self.dropdownMenu = [FFDropDownMenuView ff_DefaultStyleDropDownMenuWithMenuModelsArray:modelsArray menuWidth:FFDefaultFloat eachItemHeight:FFDefaultFloat menuRightMargin:FFDefaultFloat triangleRightMargin:FFDefaultFloat];
+    
+    self.dropdownMenu.delegate = self;
+    
+    self.dropdownMenu.ifShouldScroll = YES;
+    self.dropdownMenu.menuItemBackgroundColor = FFColor(1, 1, 1, 0.5);
+    [self.dropdownMenu setup];
 }
 
 
@@ -108,7 +114,53 @@
 }
 
 
-/** 进行基本的设置、搭建出手机QQ首页效果、读者可忽略setupBasedView 中的代码 */
+//=================================================================
+//                      FFDropDownMenuViewDelegate
+//=================================================================
+#pragma mark - FFDropDownMenuViewDelegate
+
+/** 可以在这个代理方法中稍微小修改cell的样式，比如是否需要下划线之类的 */
+/** you can modify menu cell style, Such as if should show underline */
+- (void)ffDropDownMenuView:(FFDropDownMenuView *)menuView WillAppearMenuCell:(FFDropDownMenuBasedCell *)menuCell index:(NSInteger)index {
+    
+    //若果自定义cell的样式，则在这里将  menuCell 转换成你自定义的cell
+    FFDropDownMenuCell *cell = (FFDropDownMenuCell *)menuCell;
+    
+    //如果自定义cell,你可以在这里进行一些小修改，比如是否需要下划线之类的
+    //最后一个菜单选项去掉下划线（FFDropDownMenuCell 内部已经做好处理，最后一个是没有下划线的，以下代码只是举个例子）
+    if (menuView.menuModelsArray.count - 1 == index) {
+        cell.separaterView.hidden = YES;
+    }
+    
+    else {
+        cell.separaterView.hidden = NO;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//==================================================================
+//   进行基本的设置、搭建出手机QQ首页效果、读者可忽略setupBasedView 中的代码
+//   you can ignore below code
+//==================================================================
+
+
 - (void)setupBasedView {
     //右侧的菜单按钮
     UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class FFDropDownMenuView;
+
 //model
 #import "FFDropDownMenuBasedModel.h"
 #import "FFDropDownMenuModel.h"
@@ -63,6 +65,28 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
      */
     FFDropDownMenuViewAnimateType_FallFromTop,
 };
+
+
+@protocol FFDropDownMenuViewDelegate <NSObject>
+
+
+@optional
+
+/** 若是自定义cell样式的，可以在这个代理方法中稍微小修改cell的样式，比如是否需要下划线之类的 */
+/** you can modify menu cell style, Such as if should show underline */
+- (void)ffDropDownMenuView:(FFDropDownMenuView *)menuView WillAppearMenuCell:(FFDropDownMenuBasedCell *)menuCell index:(NSInteger)index;
+
+- (void)ffDropDownMenuViewWillAppear;
+
+- (void)ffDropDownMenuViewWDidAppear;
+
+- (void)ffDropDownMenuViewWillDisappear;
+
+- (void)ffDropDownMenuViewWDidDisappear;
+
+
+@end
+
 
 /**
  *  drop-down menu
@@ -140,6 +164,17 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 ///   3、 call setup method
 ///==================================================================
 
+
+
+
+
+
+
+
+
+//=================
+//    属性的注释
+//=================
 
 
 
@@ -290,7 +325,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat animateDuration;
 
-/** 15、菜单的弹出的动画效果类型 
+/** 15、菜单的弹出的动画效果类型(若不设置，默认为FFDropDownMenuViewAnimateType_ScaleBasedTopRight)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
@@ -299,6 +334,29 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 @property (nonatomic, assign) FFDropDownMenuViewAnimateType menuAnimateType;
 
 
+/** 16、菜单是否需要滚动（若不设置，默认为不可滚动）
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     menu if should scroll.(if not assign, default value NO)
+ *
+ */
+@property (nonatomic, assign) BOOL ifShouldScroll;
+
+/** 17、菜单选项栏的高度（若不设置，默认显示全部菜单item的总高度）
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     Menu bar height.(if not assign, default value total item height)
+ *
+ */
+@property (nonatomic, assign) CGFloat menuBarHeight;
+
+
+/** 18、delegate
+ *
+ */
+@property (nonatomic, weak) id<FFDropDownMenuViewDelegate> delegate;
 
 /** 初始化(当所有属性调用完毕，一定要调用这个方法)
  */

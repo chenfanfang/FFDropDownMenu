@@ -22,8 +22,6 @@
 /** 标题 */
 @property (weak, nonatomic) UILabel *customTitleLabel;
 
-/** 底部分割线 */
-@property (nonatomic, weak) UIView *separaterView;
 @end
 
 @implementation FFDropDownMenuCell

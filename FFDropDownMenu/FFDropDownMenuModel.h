@@ -21,7 +21,6 @@
 @property (nonatomic, copy) NSString *menuItemIconName;
 
 
-
 /**
  *  快速实例化一个下拉菜单模型
  *

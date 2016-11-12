@@ -70,6 +70,8 @@
         self.bgColorEndAlpha = 0.2;
         self.animateDuration = 0.2;
         self.menuAnimateType = FFDropDownMenuViewAnimateType_ScaleBasedTopRight;
+        self.ifShouldScroll = NO;
+        self.menuBarHeight = -100; //random value,to mark if outside assign
         
         self.isCellCorrect = NO;
         self.isShow = NO;
@@ -130,14 +132,30 @@
     //设置三角形的frame <set triangle frame>
     CGFloat horizonWidth = screenSize.width; //水平的宽度
     
+    
+    
     self.triangleView.frame = CGRectMake(horizonWidth - self.triangleRightMargin - self.triangleSize.width, self.realTriangleY, self.triangleSize.width, self.triangleSize.height);
     self.triangleView.triangleColor = self.triangleColor;
     
-    //tableView的frame <set tableView frame>
-    self.menuViewFrame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, self.eachMenuItemHeight * self.menuModelsArray.count);
+    //tableView(菜单栏)的frame <set tableView(menuBar) frame>
+    CGFloat menuViewHeight = self.menuBarHeight >= 0 ? self.menuBarHeight : self.eachMenuItemHeight * self.menuModelsArray.count;
+    self.menuViewFrame = CGRectMake(horizonWidth - self.menuWidth - self.menuRightMargin, CGRectGetMaxY(self.triangleView.frame), self.menuWidth, menuViewHeight);
     self.menuContentView.frame = self.menuViewFrame;
     self.tableView.frame = self.menuContentView.bounds;
+    self.tableView.scrollEnabled = self.ifShouldScroll;
+    
+    //color
+    if (self.ifShouldScroll) {
+        self.tableView.backgroundColor = self.menuItemBackgroundColor;
+    }
+    
+    else {
+        self.tableView.backgroundColor = [UIColor clearColor];
+    }
     [self.tableView reloadData];
+    
+    
+   
 }
 
 
@@ -205,7 +223,7 @@ static NSString *const CellID = @"CellID";
 - (UITableView *)tableView {
     if (_tableView == nil) {
         UITableView *tableView = [[UITableView alloc] init];
-        tableView.backgroundColor = [UIColor clearColor];
+        tableView.backgroundColor = [UIColor whiteColor];
         [self.menuContentView addSubview:tableView];
         _tableView = tableView;
         tableView.delegate = self;
@@ -306,10 +324,27 @@ static NSString *const CellID = @"CellID";
     }
     
     FFDropDownMenuBasedCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-    cell.backgroundColor = self.menuItemBackgroundColor;
+    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     FFDropDownMenuBasedModel *menuModel = self.menuModelsArray[indexPath.row];
     cell.menuModel = menuModel;
+    
+    //如果用框架中默认的菜单样式，则隐藏最后一个菜单的下划线
+    
+    if ([cell isMemberOfClass:[FFDropDownMenuCell class]]) {
+        FFDropDownMenuCell *tempCell = (FFDropDownMenuCell *)cell;
+        if (self.menuModelsArray.count - 1 == indexPath.row) {
+            tempCell.separaterView.hidden = YES;
+        }
+        
+        else {
+            tempCell.separaterView.hidden = NO;
+        }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(ffDropDownMenuView:WillAppearMenuCell:index:)]) {
+        [self.delegate ffDropDownMenuView:self WillAppearMenuCell:cell index:indexPath.row];
+    }
     return cell;
 }
 
@@ -358,6 +393,7 @@ static NSString *const CellID = @"CellID";
 - (void)dismissMenuWithAnimation:(BOOL)animation {
     if (self.isShow == NO) return;
     
+    [self menuWillDisappear];
     self.isShow = NO;
     
     //================================
@@ -487,6 +523,7 @@ static NSString *const CellID = @"CellID";
 
 /** 显示菜单 */
 - (void)showMenu {
+    [self menuWillShow];
     
     self.isShow = YES;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
@@ -510,7 +547,9 @@ static NSString *const CellID = @"CellID";
             weakSelf.backgroundColor = FFColor(0, 0, 0, self.bgColorEndAlpha);
             weakSelf.tableView.alpha = 1;
             weakSelf.triangleView.alpha = 1;
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            [weakSelf menuDidShow];
+        }];
     }
     
     //=============
@@ -525,6 +564,8 @@ static NSString *const CellID = @"CellID";
         [UIView animateWithDuration:self.animateDuration animations:^{
             weakSelf.tableView.frame = weakSelf.menuContentView.bounds;
             weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorEndAlpha);
+        } completion:^(BOOL finished) {
+            [weakSelf menuDidShow];
         }];
     }
     
@@ -540,7 +581,9 @@ static NSString *const CellID = @"CellID";
         [UIView animateWithDuration:self.animateDuration animations:^{
             weakSelf.tableView.layer.frame = weakSelf.menuContentView.bounds;
             weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorEndAlpha);
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            [weakSelf menuDidShow];
+        }];
 
     }
     
@@ -561,10 +604,39 @@ static NSString *const CellID = @"CellID";
             [weakSelf.tableView.layer setValue:@(1) forKeyPath:@"transform.scale"];
             weakSelf.tableView.alpha = 1;
             weakSelf.triangleView.alpha = 1;
+        } completion:^(BOOL finished) {
+            [weakSelf menuDidShow];
         }];
     }
 }
 
+- (void)menuWillShow {
+    
+    if ([self.delegate respondsToSelector:@selector(ffDropDownMenuViewWillAppear)]) {
+        [self.delegate ffDropDownMenuViewWillAppear];
+    }
+}
+
+- (void)menuDidShow {
+
+    if ([self.delegate respondsToSelector:@selector(ffDropDownMenuViewWDidAppear)]) {
+        [self.delegate ffDropDownMenuViewWDidAppear];
+    }
+}
+
+- (void)menuWillDisappear {
+    
+    if ([self.delegate respondsToSelector:@selector(ffDropDownMenuViewWillDisappear)]) {
+        [self.delegate ffDropDownMenuViewWillDisappear];
+    }
+}
+
+- (void)menuDidDisappear {
+    if ([self.delegate respondsToSelector:@selector(ffDropDownMenuViewWDidDisappear)]) {
+        [self.delegate ffDropDownMenuViewWDidDisappear];
+    }
+    
+}
 
 //=================================================================
 //                   所有属性的set方法<set method>
@@ -651,5 +723,14 @@ static NSString *const CellID = @"CellID";
     _menuAnimateType = menuAnimateType;
 }
 
+- (void)setIfShouldScroll:(BOOL)ifShouldScroll {//16
+    _ifShouldScroll = ifShouldScroll;
+}
+
+- (void)setMenuBarHeight:(CGFloat)menuBarHeight { //17
+    if (menuBarHeight != FFDefaultFloat) {
+        _menuBarHeight = menuBarHeight;
+    }
+}
 
 @end
