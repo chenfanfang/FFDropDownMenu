@@ -144,14 +144,8 @@
     self.tableView.frame = self.menuContentView.bounds;
     self.tableView.scrollEnabled = self.ifShouldScroll;
     
-    //color
-    if (self.ifShouldScroll) {
-        self.tableView.backgroundColor = self.menuItemBackgroundColor;
-    }
+    self.tableView.backgroundColor = self.menuItemBackgroundColor;
     
-    else {
-        self.tableView.backgroundColor = [UIColor clearColor];
-    }
     [self.tableView reloadData];
     
     
@@ -223,7 +217,6 @@ static NSString *const CellID = @"CellID";
 - (UITableView *)tableView {
     if (_tableView == nil) {
         UITableView *tableView = [[UITableView alloc] init];
-        tableView.backgroundColor = [UIColor whiteColor];
         [self.menuContentView addSubview:tableView];
         _tableView = tableView;
         tableView.delegate = self;
@@ -231,6 +224,8 @@ static NSString *const CellID = @"CellID";
         tableView.scrollEnabled = NO;
         tableView.clipsToBounds = YES;
         tableView.layer.masksToBounds = YES;
+        tableView.showsVerticalScrollIndicator = NO;
+        tableView.showsHorizontalScrollIndicator = NO;
         self.menuContentView.layer.cornerRadius = self.menuCornerRadius;
         tableView.layer.cornerRadius = self.menuCornerRadius;
         //锚点的设置 <set anchorPoint>
@@ -324,14 +319,15 @@ static NSString *const CellID = @"CellID";
     }
     
     FFDropDownMenuBasedCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     FFDropDownMenuBasedModel *menuModel = self.menuModelsArray[indexPath.row];
     cell.menuModel = menuModel;
     
     //如果用框架中默认的菜单样式，则隐藏最后一个菜单的下划线
     
     if ([cell isMemberOfClass:[FFDropDownMenuCell class]]) {
+        
         FFDropDownMenuCell *tempCell = (FFDropDownMenuCell *)cell;
         if (self.menuModelsArray.count - 1 == indexPath.row) {
             tempCell.separaterView.hidden = YES;

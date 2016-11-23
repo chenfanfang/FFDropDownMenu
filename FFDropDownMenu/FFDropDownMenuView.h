@@ -240,7 +240,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 @property (nonatomic, assign) CGFloat menuRightMargin;
 
 /** 7、菜单选项的背景颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) 
- *     若是自定义cell,如果在自定义cell中设置了cell中子控件的颜色，这个属性将不起作用
+ *     若是自定义cell,如果在自定义cell中设置了cell中子控件的颜色，这个属性将不起作用,您可以在自定义cell中自己设置颜色
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------

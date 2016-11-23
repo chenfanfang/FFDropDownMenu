@@ -31,6 +31,8 @@
         
         //初始化子控件
         UIImageView *customImageView = [[UIImageView alloc] init];
+        customImageView.clipsToBounds = YES;
+        customImageView.layer.masksToBounds = YES;
         customImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:customImageView];
         self.customImageView = customImageView;
