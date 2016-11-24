@@ -16,12 +16,6 @@
 
 @interface FFDropDownMenuCell ()
 
-/** 图片 */
-@property (weak, nonatomic) UIImageView *customImageView;
-
-/** 标题 */
-@property (weak, nonatomic) UILabel *customTitleLabel;
-
 @end
 
 @implementation FFDropDownMenuCell
@@ -56,18 +50,23 @@
     CGFloat separaterHeight = 1; //底部分割线高度
     
     //图片 customImageView
-    CGFloat imageViewMargin = 3;
-    CGFloat imageViewH = self.frame.size.height - 2 * imageViewMargin;
-    self.customImageView.frame = CGRectMake(10, imageViewMargin, imageViewH, imageViewH);
+    
+    self.customImageView.frame = CGRectMake(self.iconLeftMargin, (self.frame.size.height - separaterHeight - self.iconSize.height) * 0.5 ,self.iconSize.width, self.iconSize.height);
     
     //标题
-    CGFloat labelX = CGRectGetMaxX(self.customImageView.frame) + 10;
+    CGFloat labelX = CGRectGetMaxX(self.customImageView.frame) + self.iconRightMargin;
     self.customTitleLabel.frame = CGRectMake(labelX, 0, self.frame.size.width - labelX, self.frame.size.height - separaterHeight);
+    
     
     //分割线
     self.separaterView.frame = CGRectMake(0, self.frame.size.height - separaterHeight, self.frame.size.width, separaterHeight);
 }
 
+
+//=================================================================
+//                            set方法
+//=================================================================
+#pragma mark - set方法
 
 - (void)setMenuModel:(id)menuModel {
     _menuModel = menuModel;
@@ -83,6 +82,17 @@
         FFLog(@"您传入的图片为空图片,框架内部默认不做任何处理。若您的确不想传入图片，则请忽略此处打印");
     }
     
+}
+
+- (void)setTitleColor:(UIColor *)titleColor {
+    _titleColor = titleColor;
+    self.customTitleLabel.textColor = titleColor;
+}
+
+- (void)setTitleFontSize:(NSInteger)titleFontSize {
+    _titleFontSize = titleFontSize;
+    
+    self.customTitleLabel.font = [UIFont systemFontOfSize:titleFontSize];
 }
 
 @end

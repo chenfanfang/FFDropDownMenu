@@ -47,7 +47,8 @@
     //如果有需要，可以设置代理（非必须）
     self.dropdownMenu.delegate = self;
     
-    self.dropdownMenu.ifShouldScroll = YES;
+    self.dropdownMenu.ifShouldScroll = NO;
+    
     
     [self.dropdownMenu setup];
 }

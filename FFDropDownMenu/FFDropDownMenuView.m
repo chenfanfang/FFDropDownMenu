@@ -54,7 +54,15 @@
         self.menuContentView.clipsToBounds = YES;
         [self addSubview:self.menuContentView];
         
-        //默认属性的赋值<assign>
+        //默认菜单样式属性的赋值
+        self.titleColor = [UIColor blackColor];
+        self.titleFontSize = 15;
+        self.iconSize = CGSizeMake(30, 30);
+        self.iconLeftMargin = 10;
+        self.iconRightMargin = 10;
+        
+        
+        //公共属性的  默认属性的赋值<assign>
         self.cellClassName = @"FFDropDownMenuCell";
         self.menuWidth = 150;
         self.menuCornerRadius = 5;
@@ -322,13 +330,18 @@ static NSString *const CellID = @"CellID";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     FFDropDownMenuBasedModel *menuModel = self.menuModelsArray[indexPath.row];
-    cell.menuModel = menuModel;
     
     //如果用框架中默认的菜单样式，则隐藏最后一个菜单的下划线
     
     if ([cell isMemberOfClass:[FFDropDownMenuCell class]]) {
         
         FFDropDownMenuCell *tempCell = (FFDropDownMenuCell *)cell;
+        tempCell.titleColor = self.titleColor;
+        tempCell.titleFontSize = self.titleFontSize;
+        tempCell.iconSize = self.iconSize;
+        tempCell.iconLeftMargin = self.iconLeftMargin;
+        tempCell.iconRightMargin = self.iconRightMargin;
+        
         if (self.menuModelsArray.count - 1 == indexPath.row) {
             tempCell.separaterView.hidden = YES;
         }
@@ -337,6 +350,8 @@ static NSString *const CellID = @"CellID";
             tempCell.separaterView.hidden = NO;
         }
     }
+    
+    cell.menuModel = menuModel;
     
     if ([self.delegate respondsToSelector:@selector(ffDropDownMenuView:WillAppearMenuCell:index:)]) {
         [self.delegate ffDropDownMenuView:self WillAppearMenuCell:cell index:indexPath.row];

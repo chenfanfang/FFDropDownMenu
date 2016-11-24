@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 @optional
 
-/** 若是自定义cell样式的，可以在这个代理方法中稍微小修改cell的样式，比如是否需要下划线之类的 */
+/** 若是自定义cell样式的，可以在这个代理方法中稍微小修改cell的样式，比如是否需要下划线、字体的颜色等等*/
 /** you can modify menu cell style, Such as if should show underline */
 - (void)ffDropDownMenuView:(FFDropDownMenuView *)menuView WillAppearMenuCell:(FFDropDownMenuBasedCell *)menuCell index:(NSInteger)index;
 
@@ -169,12 +169,44 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 
 
+//===================================================================
+//    default menu style properties
+//    默认菜单样式的属性(只对默认菜单样式起作用，若使用自定义样式，则不起作用)
+//===================================================================
+
+/** 默认菜单样式 的字体颜色(默认为黑色) */
+@property (nonatomic, assign) UIColor *titleColor;
+
+/** 默认菜单样式 的字体大小(默认尺寸为15) */
+@property (nonatomic, assign) NSInteger titleFontSize;
+
+/** 默认菜单样式 要显示的图片的size */
+@property (nonatomic, assign) CGSize iconSize;
+
+/** 默认菜单样式 图片的左边距(默认左边距为10) */
+@property (nonatomic, assign) CGFloat iconLeftMargin;
+
+/** 默认菜单样式 图片的右边距(也就是和标题之间的边距，默认为10) */
+@property (nonatomic, assign) CGFloat iconRightMargin;
 
 
 
-//=================
-//    属性的注释
-//=================
+
+
+
+
+
+
+
+
+
+
+
+
+//===================================================================
+//    public properties (default menu style、custom menu style)
+//    公共属性的注释(不论是自定义样式，还是使用默认的下拉菜单样式都适用的属性)
+//===================================================================
 
 
 
@@ -357,6 +389,12 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  *
  */
 @property (nonatomic, weak) id<FFDropDownMenuViewDelegate> delegate;
+
+
+
+
+
+
 
 /** 初始化(当所有属性调用完毕，一定要调用这个方法)
  */
