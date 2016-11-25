@@ -73,7 +73,7 @@
         self.triangleY = 64;
         self.realTriangleY = self.triangleY;
         self.triangleRightMargin = 20;
-        self.triangleSize = FFDefaultSize;
+        self.triangleSize = CGSizeMake(18, 10);
         self.bgColorbeginAlpha = 0.02;
         self.bgColorEndAlpha = 0.2;
         self.animateDuration = 0.2;
@@ -649,10 +649,46 @@ static NSString *const CellID = @"CellID";
     
 }
 
+
+
+
 //=================================================================
-//                   所有属性的set方法<set method>
+//                           默认样式属性的set方法
 //=================================================================
-#pragma mark - 所有属性的set方法<set method>
+#pragma mark - 默认样式属性的set方法
+
+- (void)setTitleColor:(UIColor *)titleColor { //1
+    if (titleColor != nil) {
+        _titleColor = titleColor;
+    }
+}
+
+
+- (void)setTitleFontSize:(NSInteger)titleFontSize {//2
+    _titleFontSize = titleFontSize;
+}
+
+- (void)setIconSize:(CGSize)iconSize { //3
+    _iconSize = iconSize;
+}
+
+- (void)setIconLeftMargin:(CGFloat)iconLeftMargin {//4
+    _iconLeftMargin = iconLeftMargin;
+}
+
+
+- (void)setIconRightMargin:(CGFloat)iconRightMargin {//5
+    _iconRightMargin = iconRightMargin;
+}
+
+
+
+
+
+//=================================================================
+//                   公共属性的set方法<set method>
+//=================================================================
+#pragma mark - 公共属性的set方法<set method>
 
 - (void)setMenuModelsArray:(NSArray *)menuModelsArray {//1
     _menuModelsArray = menuModelsArray;

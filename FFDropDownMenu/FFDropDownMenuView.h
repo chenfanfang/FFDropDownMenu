@@ -21,9 +21,7 @@
 
 //default value
 #define FFDefaultFloat -10.0
-#define FFDefaultSize CGSizeMake(18, 10)
 #define FFDefaultCell @"FFDropDownMenuCell"
-#define FFDefaultColor [UIColor whiteColor]
 #define FFDefaultMenuScaleType FFDropDownMenuViewAnimateType_ScaleBasedTopRight
 
 //rgb color  r-red 、  g-green  、  b-blue  、 a-alpha
@@ -170,23 +168,50 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 
 //===================================================================
-//    default menu style properties
+//    default menu style properties（only effect on default menu style）
 //    默认菜单样式的属性(只对默认菜单样式起作用，若使用自定义样式，则不起作用)
 //===================================================================
 
-/** 默认菜单样式 的字体颜色(默认为黑色) */
+
+
+/** 1、默认菜单样式 的字体颜色(默认为黑色) 
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     default menu style: titleColor (if not assign, default value is black color)
+ */
 @property (nonatomic, assign) UIColor *titleColor;
 
-/** 默认菜单样式 的字体大小(默认尺寸为15) */
+/** 2、默认菜单样式 的字体大小(默认尺寸为15)
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     default menu style: titleFontSize (if not assign, default value is 15)
+ */
 @property (nonatomic, assign) NSInteger titleFontSize;
 
-/** 默认菜单样式 要显示的图片的size */
+/** 3、默认菜单样式 要显示的图片的size
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     default menu style: iconSize (if not assign, default value is CGSizeMake(30, 30))
+ */
 @property (nonatomic, assign) CGSize iconSize;
 
-/** 默认菜单样式 图片的左边距(默认左边距为10) */
+/** 4、默认菜单样式 图片的左边距(默认左边距为10)
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     default menu style: iconLeftMargin (if not assign, default value is 10.0)
+ */
 @property (nonatomic, assign) CGFloat iconLeftMargin;
 
-/** 默认菜单样式 图片的右边距(也就是和标题之间的边距，默认为10) */
+/** 5、默认菜单样式 图片的右边距(也就是和标题之间的边距，默认为10)
+ *     -----------------------------------------------------------
+ *     English description:
+ *     -----------------------------------------------------------
+ *     default menu style: iconRightMargin (margin between icon and title)(if not assign, default value is 10.0)
+ */
 @property (nonatomic, assign) CGFloat iconRightMargin;
 
 
@@ -198,15 +223,10 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 
 
-
-
-
-
-
-//===================================================================
-//    public properties (default menu style、custom menu style)
+//==========================================================================
+//    public properties (effect on default menu style and custom menu style)
 //    公共属性的注释(不论是自定义样式，还是使用默认的下拉菜单样式都适用的属性)
-//===================================================================
+//==========================================================================
 
 
 
@@ -396,7 +416,14 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 
 
+
+
+
+
+
+
 /** 初始化(当所有属性调用完毕，一定要调用这个方法)
+ *  assign all properies complete must call this method
  */
 - (void)setup;
 
